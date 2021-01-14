@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  extends: ['airbnb'],
+  extends: 'airbnb',
   plugins: [
     '@typescript-eslint',
     'react',
@@ -15,6 +15,7 @@ module.exports = {
     render: true,
     mount: true,
     it: true,
+    window: true,
   },
   rules: {
     'import/no-unresolved': 0,
@@ -27,5 +28,6 @@ module.exports = {
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'no-use-before-define': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };
