@@ -1,9 +1,9 @@
-/**
- * @format
- */
+import { Navigation } from 'react-native-navigation';
 
-import { AppRegistry } from 'react-native';
-import App from './App';
-import { name as appName } from './app';
+import registerNavigationScreens from './src/navigation/RegisterNavigation';
+import { setHomeNavigation } from './src/navigation/AppNavigation';
 
-AppRegistry.registerComponent(appName, () => App);
+Navigation.events().registerAppLaunchedListener(async () => {
+  registerNavigationScreens();
+  setHomeNavigation();
+});
