@@ -1,30 +1,22 @@
-import React, { useEffect } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  StatusBar,
-  Button,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { useTranslation } from 'react-i18next';
 
 import { HomeStateType } from '../reducers/Home';
 import { selectHomeInfo } from '../selectors/Home';
 import { getHomeAction } from '../actions/Home';
 
-import { navigateToOrganizationList } from '../../../navigation/AppNavigation';
-
-const styles = StyleSheet.create({
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-});
+import {
+  ScopeBar,
+  ScreenContainer,
+  ScreenTitle,
+  SearchInput,
+} from '../../../components';
 
 const Home = ({ componentId }: { componentId: string }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     dispatch(getHomeAction());
@@ -32,18 +24,21 @@ const Home = ({ componentId }: { componentId: string }) => {
 
   const { isFetching, error }: HomeStateType = useSelector(selectHomeInfo());
 
+  const onChangeText = (value: string) => {
+    setSearchText(value);
+  };
+
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Text style={styles.sectionTitle}>Step One</Text>
-        <Button
-          title="Organization List"
-          color="#710ce3"
-          onPress={() => navigateToOrganizationList(componentId)}
-        />
-      </SafeAreaView>
-    </>
+    <ScreenContainer>
+      <ScreenTitle text={t('home.containerTitle')} />
+      <SearchInput onChangeText={onChangeText} value={searchText} />
+      <ScopeBar
+        firstText={t('home.scopeBarRepositories')}
+        onFirstClick={() => {}}
+        secondText={t('home.scopeBarOrganizations')}
+        onSecondClick={() => {}}
+      />
+    </ScreenContainer>
   );
 };
 

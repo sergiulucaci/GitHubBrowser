@@ -1,0 +1,25 @@
+{
+  "home": {
+    "containerTitle": "Find repos",
+    "navigationTitle": "Home",
+    "scopeBarRepositories": "Repositories",
+    "scopeBarOrganizations": "Organizations",
+    "upcomingSessions": {
+      "exploreCources": "Here you will be able to see all sessions ahead. Find the perfect course in the catalogue.",
+      "exploreCourcesButton": "EXPLORE CLASSES",
+      "goToCalendarButton": "GO TO CALENDAR",
+      "joinButton": "JOIN SESSION",
+      "nextSession": "Next Session:",
+      "session": {
+        "scheduled": "SCHEDULED"
+      },
+      "status": {
+        "hoursFormat": "HH[h] mm[m]",
+        "live": "LIVE",
+        "minutesFormat": "mm[m] ss[sec]",
+        "startingIn": "Starting in"
+      },
+      "withCoach": "with <1>{{coachName}}</1>"
+    }
+  },
+}
