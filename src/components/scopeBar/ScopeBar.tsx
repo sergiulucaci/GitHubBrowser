@@ -30,6 +30,7 @@ const Button = styled.TouchableOpacity<ButtonProps>`
 
 const Text = styled.Text`
   font-size: 13px;
+  font-weight: 500;
 `;
 
 type Props = {

@@ -1,4 +1,4 @@
-import { takeLatest, put, all } from 'redux-saga/effects';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import {
   getHomeSuccessAction,
@@ -9,6 +9,7 @@ import {
 import { ApiHomes } from '../models/Home';
 
 import { FSA } from '../../../store/FSA';
+import { getHome } from '../api/Home';
 
 export function* sessionsActionSaga(
   action: FSA<GetHomePayload>,
@@ -21,6 +22,8 @@ export function* sessionsActionSaga(
       previous: null,
       results: [{ id: 1 }],
     };
+    const rs = yield call(getHome);
+
     yield put(
       getHomeSuccessAction({
         response,
@@ -28,12 +31,11 @@ export function* sessionsActionSaga(
       }),
     );
   } catch (error) {
+    console.log('== error: ', error);
     yield put(getHomeFailureAction(error));
   }
 }
 
 export function* homeSaga(): Generator<any, any, any> {
-  yield all([
-    takeLatest(SessionsActionType.GET_HOME, sessionsActionSaga),
-  ]);
+  yield all([takeLatest(SessionsActionType.GET_HOME, sessionsActionSaga)]);
 }

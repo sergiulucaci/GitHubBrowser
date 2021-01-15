@@ -9,6 +9,12 @@ export function setHomeNavigation(): void {
           {
             component: {
               name: Screens.Home,
+              options: {
+                topBar: {
+                  drawBehind: true,
+                  noBorder: true,
+                },
+              },
             },
           },
         ],

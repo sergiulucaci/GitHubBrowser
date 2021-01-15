@@ -1,7 +1,7 @@
 {
   "home": {
     "containerTitle": "Find repos",
-    "navigationTitle": "Home",
+    "topNavTitle": "Find repos",
     "scopeBarRepositories": "Repositories",
     "scopeBarOrganizations": "Organizations",
     "upcomingSessions": {
@@ -22,4 +22,11 @@
       "withCoach": "with <1>{{coachName}}</1>"
     }
   },
+  "network": {
+    "alertNoNetworkTitle": "No internet connection found",
+    "alertNoNetworkSubtitle": "Turn on WiFi or mobile data and try to reload this screen."
+  },
+  "error": {
+    "apiErrorMessage": "Something went wrong on our side"
+  }
 }
