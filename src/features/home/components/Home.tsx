@@ -17,6 +17,7 @@ import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll'
 import { selectRepositories } from '../selectors/Home';
 import RepositoryListItem from './RepositoryListItem';
 import Colors from '../../../theme/Colors';
+import ScreenSubtitle from '../../../components/screen/ScreenSubtitle';
 
 const NoDataWrapper = styled.View`
   align-items: center;
@@ -37,7 +38,7 @@ const NoDataTitle = styled.Text`
 
 const NoDataSubtitle = styled.Text`
   color: ${Colors.SECONDARY.GRAY};
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 4px;
   text-align: center;
 `;
@@ -47,10 +48,16 @@ const Separator = styled.View`
   border-color: ${Colors.SECONDARY.LIGHT_GRAY};
 `;
 
+const ScreenSubtitleWrapper = styled(ScreenSubtitle)`
+  margin-top: 16px;
+  margin-bottom: 8px;
+`;
+
 const Home = ({ componentId }: { componentId: string }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [searchText, setSearchText] = useState('');
+  const [page, setPage] = useState(1);
   const [searchByOrganizationActive, setSearchByOrganizationActive] = useState(
     true,
   );
@@ -67,12 +74,24 @@ const Home = ({ componentId }: { componentId: string }) => {
 
   const data = useSelector(selectRepositories());
 
+  const resetPageToLoad = () => {
+    if (page > 1) {
+      setPage(1);
+    }
+  };
+
+  const loadMoreResults = ({ pageToLoad }: { pageToLoad: number }) => {
+    onSearch({ value: searchText, pageToLoad });
+  };
+
   const onSearch = ({
     value,
     customQuery,
+    pageToLoad = 1,
   }: {
     value?: string;
     customQuery?: { organization?: string; repository?: string };
+    pageToLoad?: number;
   }) => {
     let query;
     if (customQuery) {
@@ -80,13 +99,13 @@ const Home = ({ componentId }: { componentId: string }) => {
     } else {
       query = searchByOrganizationActive
         ? {
-          organization: value,
-        }
+            organization: value,
+          }
         : {
-          repository: value,
-        };
+            repository: value,
+          };
     }
-    dispatch(getRepositoryAction(query));
+    dispatch(getRepositoryAction({ ...query, page: pageToLoad }));
   };
 
   const handleOnSearchDelayed = useCallback(debounce(onSearch, 500), [
@@ -94,8 +113,9 @@ const Home = ({ componentId }: { componentId: string }) => {
   ]);
   const onChangeText = (value: string) => {
     setSearchText(value);
+    resetPageToLoad();
     if (value.length === 1) {
-      onSearch(({ value }));
+      onSearch({ value });
     } else {
       handleOnSearchDelayed({ value });
     }
@@ -105,6 +125,7 @@ const Home = ({ componentId }: { componentId: string }) => {
     if (!searchByOrganizationActive) {
       setSearchByOrganizationActive(true);
       if (searchText) {
+        resetPageToLoad();
         onSearch({ customQuery: { organization: searchText } });
       }
     }
@@ -114,6 +135,7 @@ const Home = ({ componentId }: { componentId: string }) => {
     if (searchByOrganizationActive) {
       setSearchByOrganizationActive(false);
       if (searchText) {
+        resetPageToLoad();
         onSearch({ customQuery: { repository: searchText } });
       }
     }
@@ -138,18 +160,32 @@ const Home = ({ componentId }: { componentId: string }) => {
         secondText={t('home.scopeBarRepositories')}
         onSecondClick={onSearchByRepositoryClick}
       />
+      {/*{!data.isFetching && !!data.payload.total_count && (*/}
+      {/*  <>*/}
+      {/*    <ScreenSubtitleWrapper text={`${data.payload.total_count} results found`} />*/}
+      {/*    <Separator />*/}
+      {/*  </>*/}
+      {/*)}*/}
     </>
   );
 
   const NoDataComponent = () => {
     if (data.isFetching) {
-      return <NoDataWrapper><LoadingWrapper /></NoDataWrapper>;
+      return (
+        <NoDataWrapper>
+          <LoadingWrapper />
+        </NoDataWrapper>
+      );
     }
     return (
       <NoDataWrapper>
-        <NoDataTitle>{t(searchText ? 'search.noResultsTitle' : 'search.noDataYetTitle')}</NoDataTitle>
+        <NoDataTitle>
+          {t(searchText ? 'search.noResultsTitle' : 'search.noDataYetTitle')}
+        </NoDataTitle>
         <NoDataSubtitle>
-          {searchText ? t('search.noResultsSubtitle', { value: searchText }) : t('search.noDataYetSubtitle')}
+          {searchText
+            ? t('search.noResultsSubtitle', { value: searchText })
+            : t('search.noDataYetSubtitle')}
         </NoDataSubtitle>
       </NoDataWrapper>
     );
@@ -160,6 +196,11 @@ const Home = ({ componentId }: { componentId: string }) => {
       <FlatList
         contentContainerStyle={{ marginHorizontal: 16 }}
         onScroll={onScroll}
+        onEndReached={() => {
+          const pageToLoad = page + 1;
+          setPage(pageToLoad);
+          loadMoreResults({ pageToLoad });
+        }}
         ListHeaderComponent={ScreenHeader}
         ItemSeparatorComponent={() => <Separator />}
         ListEmptyComponent={NoDataComponent}

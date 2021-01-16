@@ -30,26 +30,26 @@ const OwnerAvatar = styled.Image`
 `;
 
 const OwnerTitle = styled.Text`
-  font-size: 12px;
+  font-size: 13px;
   color: ${Colors.SECONDARY.DARK_GRAY};
   margin-left: 8px;
 `;
 
 const BottomText = styled.Text`
-  font-size: 14px;
+  font-size: 13px;
   color: ${Colors.SECONDARY.GRAY};
   margin-left: 4px;
 `;
 
 const RepoTitle = styled.Text`
-  font-size: 16px;
+  font-size: 17px;
   color: ${Colors.SECONDARY.DARK_GRAY};
   font-weight: 600;
   margin-top: 6px;
 `;
 
 const RepoDescription = styled.Text`
-  font-size: 16px;
+  font-size: 17px;
   color: ${Colors.SECONDARY.DARK_GRAY};
   margin-top: 6px;
 `;

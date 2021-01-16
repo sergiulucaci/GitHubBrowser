@@ -1,4 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import config from '../../../config/Config';
 
 import {
   SessionsActionType,
@@ -42,18 +43,17 @@ export function* sessionsActionSaga(
 export function* getRepositoryActionSaga(
   action: FSA<GetRepositoryPayload>,
 ): Generator<Object, void> {
-  const { organization, repository } = action.payload;
+  const { organization, repository, page } = action.payload;
   try {
     let qParsed = '';
     if (organization) {
       qParsed = `org:${organization}`;
     } else if (repository) {
-      qParsed = `${repository} in:name`;
+      qParsed = encodeURIComponent(`${repository} in:name`);
     }
-    console.log(qParsed);
-    const qEncoded = encodeURIComponent(qParsed);
+    qParsed = `${qParsed}&page=${page}&per_page=10&access_token=${config.api.accessToken}`;
 
-    const rs: any = yield call(getRepository, qEncoded);
+    const rs: any = yield call(getRepository, qParsed);
     yield put(getRepositorySuccessAction(rs));
   } catch (e) {
     yield put(getRepositoryFailureAction(e));

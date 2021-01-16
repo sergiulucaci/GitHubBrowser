@@ -7,6 +7,7 @@ export type RepositoryStateType = {
   isFetched: boolean;
   error: boolean;
   errorMessage?: string;
+  page: number;
   payload: {
     incomplete_results: boolean;
     items: ApiRepository[];
@@ -18,6 +19,7 @@ export const initialState: RepositoryStateType = Object.freeze({
   isFetching: false,
   isFetched: false,
   error: false,
+  page: 1,
   payload: {
     incomplete_results: false,
     items: [],
@@ -29,14 +31,15 @@ const home = handleActions(
   {
     [SessionsActionType.GET_REPOSITORY]: (
       state: RepositoryStateType,
-      action,
+      action: { payload: { page: number } },
     ): RepositoryStateType => ({
       ...state,
-      isFetching: true,
+      isFetching: action.payload.page < 2,
       error: false,
+      page: action.payload.page,
       payload: {
         incomplete_results: false,
-        items: [],
+        items: action.payload.page < 2 ? [] : state.payload.items,
         total_count: null,
       },
     }),
@@ -49,7 +52,13 @@ const home = handleActions(
       isFetched: true,
       error: false,
       // TODO: Add a mapper for APIFeaturedClass
-      payload: action.payload.data,
+      payload:
+        state.page > 1
+          ? {
+            ...action.payload.data,
+            items: [...state.payload.items, ...action.payload.data.items],
+          }
+          : action.payload.data,
     }),
     [SessionsActionType.GET_REPOSITORY_FAILURE]: (
       state,

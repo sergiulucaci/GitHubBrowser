@@ -58,6 +58,7 @@ export function getHomeFailureAction(error: Error): FSA<{ error: Error }> {
 export type GetRepositoryPayload = {
   organization?: string,
   repository?: string,
+  page?: number,
 };
 
 export function getRepositoryAction(query: GetRepositoryPayload): FSA<GetRepositoryPayload> {
