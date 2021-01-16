@@ -1,5 +1,7 @@
 import { Navigation } from 'react-native-navigation';
+
 import { Screens } from './Screens';
+import { Repository } from '../features/home/models/Repository';
 
 export function setHomeNavigation(): void {
   Navigation.setRoot({
@@ -23,16 +25,24 @@ export function setHomeNavigation(): void {
   });
 }
 
-export function navigateToOrganizationList(componentId: string): void {
+export function navigateToIssueList({
+  componentId,
+  repository,
+}: {
+  componentId: string;
+  repository: Repository;
+}): void {
   Navigation.push(componentId, {
     component: {
-      name: Screens.OrganizationList,
+      name: Screens.IssueList,
       options: {
         topBar: {
-          title: {
-            text: 'Organization List',
-          },
+          drawBehind: true,
+          noBorder: true,
         },
+      },
+      passProps: {
+        repository,
       },
     },
   });

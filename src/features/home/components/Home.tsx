@@ -201,7 +201,9 @@ const Home = ({ componentId }: { componentId: string }) => {
         ItemSeparatorComponent={() => <Separator />}
         ListEmptyComponent={NoDataComponent}
         data={data.payload.items}
-        renderItem={({ item }) => <RepositoryListItem item={item} />}
+        renderItem={({ item }) => (
+          <RepositoryListItem componentId={componentId} item={item} />
+        )}
         keyExtractor={(item: { id: number }) => String(item.id)}
       />
     </ScreenContainer>

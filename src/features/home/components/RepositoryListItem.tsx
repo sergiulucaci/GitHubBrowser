@@ -4,9 +4,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Repository } from '../models/Repository';
 import Colors from '../../../theme/Colors';
+import { navigateToIssueList } from '../../../navigation/AppNavigation';
 
-const Base = styled.View`
-  margin-vertical: 12px;
+const Base = styled.TouchableOpacity`
+  padding-vertical: 12px;
 `;
 
 const Row = styled.View`
@@ -61,8 +62,17 @@ const Bullet = styled.View`
   margin-left: 8px;
 `;
 
-const RepositoryListItem = ({ item }: { item: Repository }) => (
-  <Base>
+const RepositoryListItem = ({
+  componentId,
+  item,
+}: {
+  componentId: string;
+  item: Repository;
+}) => (
+  <Base
+    delayPressIn={50}
+    onPress={() => navigateToIssueList({ componentId, repository: item })}
+  >
     <Row>
       <OwnerAvatar
         resizeMode="contain"
