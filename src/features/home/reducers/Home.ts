@@ -1,6 +1,11 @@
 import { handleActions } from 'redux-actions';
-import { SessionsActionType } from '../actions/Home';
-import { ApiRepository } from '../models/Repository';
+import {
+  SessionsActionType,
+} from '../actions/Home';
+import {
+  Repositories,
+  repositoriesMapper,
+} from '../models/Repository';
 
 export type RepositoryStateType = {
   isFetching: boolean;
@@ -8,11 +13,7 @@ export type RepositoryStateType = {
   error: boolean;
   errorMessage?: string;
   page: number;
-  payload: {
-    incomplete_results: boolean;
-    items: ApiRepository[];
-    total_count: null;
-  };
+  payload: Repositories;
 };
 
 export const initialState: RepositoryStateType = Object.freeze({
@@ -21,9 +22,9 @@ export const initialState: RepositoryStateType = Object.freeze({
   error: false,
   page: 1,
   payload: {
-    incomplete_results: false,
+    incompleteResults: false,
     items: [],
-    total_count: null,
+    totalCount: 0,
   },
 });
 
@@ -32,37 +33,44 @@ const home = handleActions(
     [SessionsActionType.GET_REPOSITORY]: (
       state: RepositoryStateType,
       action: { payload: { page: number } },
-    ): RepositoryStateType => ({
-      ...state,
-      isFetching: action.payload.page < 2,
-      error: false,
-      page: action.payload.page,
-      payload: {
-        incomplete_results: false,
-        items: action.payload.page < 2 ? [] : state.payload.items,
-        total_count: null,
-      },
-    }),
+    ): RepositoryStateType => {
+      const firstLoad = action.payload.page < 2;
+      return {
+        ...state,
+        isFetching: firstLoad,
+        error: false,
+        page: action.payload.page,
+        payload: {
+          incompleteResults: firstLoad
+            ? false
+            : state.payload.incompleteResults,
+          items: firstLoad ? [] : state.payload.items,
+          totalCount: firstLoad ? 0 : state.payload.totalCount,
+        },
+      };
+    },
     [SessionsActionType.GET_REPOSITORY_SUCCESS]: (
-      state,
-      action: { payload: any },
-    ): RepositoryStateType => ({
-      ...state,
-      isFetching: false,
-      isFetched: true,
-      error: false,
-      // TODO: Add a mapper for APIFeaturedClass
-      payload:
-        state.page > 1
-          ? {
-            ...action.payload.data,
-            items: [...state.payload.items, ...action.payload.data.items],
-          }
-          : action.payload.data,
-    }),
+      state: RepositoryStateType,
+      action: { payload: any }, // Should be "action: FSA<GetRepositorySuccessPayload>"
+    ): RepositoryStateType => {
+      const dataMapped = repositoriesMapper(action.payload.data);
+      return {
+        ...state,
+        isFetching: false,
+        isFetched: true,
+        error: false,
+        payload:
+          state.page > 1
+            ? {
+              ...dataMapped,
+              items: [...state.payload.items, ...dataMapped.items],
+            }
+            : dataMapped,
+      };
+    },
     [SessionsActionType.GET_REPOSITORY_FAILURE]: (
-      state,
-      action: { payload: any },
+      state: RepositoryStateType,
+      action: { payload: any }, // // Should be "action: FSA<Error>"
     ): RepositoryStateType => ({
       ...state,
       isFetching: false,

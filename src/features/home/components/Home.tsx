@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
@@ -14,10 +14,11 @@ import {
   SearchInput,
 } from '../../../components';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
-import { selectRepositories } from '../selectors/Home';
+import { selectRepository } from '../selectors/Home';
 import RepositoryListItem from './RepositoryListItem';
 import Colors from '../../../theme/Colors';
 import ScreenSubtitle from '../../../components/screen/ScreenSubtitle';
+import { RepositoryStateType } from '../reducers/Home';
 
 const NoDataWrapper = styled.View`
   align-items: center;
@@ -66,13 +67,7 @@ const Home = ({ componentId }: { componentId: string }) => {
     title: t('home.topNavTitle'),
   });
 
-  useEffect(() => {
-    // dispatch(getHomeAction());
-  }, []);
-
-  // const { isFetching, error }: HomeStateType = useSelector(selectHomeInfo());
-
-  const data = useSelector(selectRepositories());
+  const data: RepositoryStateType = useSelector(selectRepository());
 
   const resetPageToLoad = () => {
     if (page > 1) {
@@ -99,11 +94,11 @@ const Home = ({ componentId }: { componentId: string }) => {
     } else {
       query = searchByOrganizationActive
         ? {
-            organization: value,
-          }
+          organization: value,
+        }
         : {
-            repository: value,
-          };
+          repository: value,
+        };
     }
     dispatch(getRepositoryAction({ ...query, page: pageToLoad }));
   };
@@ -111,6 +106,7 @@ const Home = ({ componentId }: { componentId: string }) => {
   const handleOnSearchDelayed = useCallback(debounce(onSearch, 500), [
     searchByOrganizationActive,
   ]);
+
   const onChangeText = (value: string) => {
     setSearchText(value);
     resetPageToLoad();
@@ -160,9 +156,9 @@ const Home = ({ componentId }: { componentId: string }) => {
         secondText={t('home.scopeBarRepositories')}
         onSecondClick={onSearchByRepositoryClick}
       />
-      {/*{!data.isFetching && !!data.payload.total_count && (*/}
+      {/*{!data.isFetching && !!data.payload.totalCount && (*/}
       {/*  <>*/}
-      {/*    <ScreenSubtitleWrapper text={`${data.payload.total_count} results found`} />*/}
+      {/*    <ScreenSubtitleWrapper text={`${data.payload.totalCount} results found`} />*/}
       {/*    <Separator />*/}
       {/*  </>*/}
       {/*)}*/}

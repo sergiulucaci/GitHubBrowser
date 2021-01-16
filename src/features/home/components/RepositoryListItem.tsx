@@ -1,9 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { ApiRepository } from '../models/Repository';
+import { Repository } from '../models/Repository';
 import Colors from '../../../theme/Colors';
 
 const Base = styled.View`
@@ -62,12 +61,12 @@ const Bullet = styled.View`
   margin-left: 8px;
 `;
 
-const RepositoryListItem = ({ item }: { item: ApiRepository }) => (
+const RepositoryListItem = ({ item }: { item: Repository }) => (
   <Base>
     <Row>
       <OwnerAvatar
         resizeMode="contain"
-        source={{ uri: item.owner.avatar_url }}
+        source={{ uri: item.owner.avatarUrl }}
       />
       <OwnerTitle>{item.owner.login}</OwnerTitle>
     </Row>
@@ -76,7 +75,7 @@ const RepositoryListItem = ({ item }: { item: ApiRepository }) => (
     <BottomRow>
       <Row>
         <Icon name="star-outline" size={12} color={Colors.SECONDARY.GRAY} />
-        <BottomText>{item.stargazers_count}</BottomText>
+        <BottomText>{item.stargazersCount}</BottomText>
         <Bullet />
         <BottomText>{item.language}</BottomText>
       </Row>
