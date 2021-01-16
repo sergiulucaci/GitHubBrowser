@@ -35,8 +35,10 @@ const callApi = async ({
   await checkForInternetConnection();
   const axiosConfig = {
     baseURL: config.api.baseUrl,
-    'Content-Type': 'application/json',
-    Accept: config.api.baseUrlAcceptedVersion,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: config.api.baseUrlAcceptedVersion,
+    },
     ...apiConfig,
   };
 

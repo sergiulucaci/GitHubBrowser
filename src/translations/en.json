@@ -2,25 +2,16 @@
   "home": {
     "containerTitle": "Find repos",
     "topNavTitle": "Find repos",
-    "scopeBarRepositories": "Repositories",
-    "scopeBarOrganizations": "Organizations",
-    "upcomingSessions": {
-      "exploreCources": "Here you will be able to see all sessions ahead. Find the perfect course in the catalogue.",
-      "exploreCourcesButton": "EXPLORE CLASSES",
-      "goToCalendarButton": "GO TO CALENDAR",
-      "joinButton": "JOIN SESSION",
-      "nextSession": "Next Session:",
-      "session": {
-        "scheduled": "SCHEDULED"
-      },
-      "status": {
-        "hoursFormat": "HH[h] mm[m]",
-        "live": "LIVE",
-        "minutesFormat": "mm[m] ss[sec]",
-        "startingIn": "Starting in"
-      },
-      "withCoach": "with <1>{{coachName}}</1>"
-    }
+    "scopeBarRepositories": "By repository",
+    "scopeBarOrganizations": "By organization",
+    "searchByOrganizationPlaceholder": "Search by organization name...",
+    "searchByRepositoryPlaceholder": "Search by repository name..."
+  },
+  "search": {
+    "noResultsTitle": "No Results",
+    "noResultsSubtitle": "There were no results for \"{{value}}\". Try a new search.",
+    "noDataYetTitle": "No Data (yet)",
+    "noDataYetSubtitle": "Start searching for repositories using the above input."
   },
   "network": {
     "alertNoNetworkTitle": "No internet connection found",

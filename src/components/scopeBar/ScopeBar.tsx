@@ -34,10 +34,11 @@ const Text = styled.Text`
 `;
 
 type Props = {
-  firstText: string;
-  onFirstClick: Function;
-  secondText: string;
-  onSecondClick: Function;
+  firstText: string,
+  onFirstClick: Function,
+  secondText: string,
+  onSecondClick: Function,
+  firstIsActive: boolean,
 };
 
 const ScopeBar = ({
@@ -45,19 +46,16 @@ const ScopeBar = ({
   onFirstClick,
   secondText,
   onSecondClick,
+  firstIsActive,
 }: Props) => {
-  const [firstIsActive, setFirstIsActive] = useState(true);
-
   const handleOnFirstButtonPress = () => {
     if (!firstIsActive) {
-      setFirstIsActive(true);
       onFirstClick();
     }
   };
 
   const handleOnSecondButtonPress = () => {
     if (firstIsActive) {
-      setFirstIsActive(false);
       onSecondClick();
     }
   };
