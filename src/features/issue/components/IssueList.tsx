@@ -24,6 +24,8 @@ import { selectIssue } from '../selectors/Home';
 import { IssueStateType } from '../reducers/Issue';
 import IssueListItem from './IssueListItem';
 import Colors from '../../../theme/Colors';
+import { navigateToIssueFilters } from '../../../navigation/AppNavigation';
+import { Screens } from '../../../navigation/Screens';
 
 const Row = styled.View`
   display: flex;
@@ -65,17 +67,37 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
     additionalPadding: 32,
   });
 
+  const data: IssueStateType = useSelector(selectIssue());
+
   useEffect(() => {
     loadIssues({ pageToLoad: page });
 
     const navigationButtonEventListener = Navigation.events().registerNavigationButtonPressedListener(
       ({ buttonId }) => {
-        alert('go to filters');
+        switch (buttonId) {
+          case Screens.TopNavButtons.FilterIssues: {
+            navigateToIssueFilters({ repository });
+            break;
+          }
+          case Screens.TopNavButtons.FilterIssuesDone: {
+            Navigation.dismissAllModals();
+            break;
+          }
+          default:
+            break;
+        }
+      },
+    );
+
+    const modalDismissedEventListener = Navigation.events().registerModalDismissedListener(
+      () => {
+        loadIssues({ pageToLoad: 1 });
       },
     );
 
     return () => {
       navigationButtonEventListener.remove();
+      modalDismissedEventListener.remove();
     };
   }, []);
 
@@ -88,8 +110,6 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
       }),
     );
   };
-
-  const data: IssueStateType = useSelector(selectIssue());
 
   const ScreenHeader = (
     <>
@@ -121,9 +141,7 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
     }
     return (
       <NoDataWrapper>
-        <NoDataTitle>
-          {t('issue.noData')}
-        </NoDataTitle>
+        <NoDataTitle>{t('issue.noData')}</NoDataTitle>
       </NoDataWrapper>
     );
   };

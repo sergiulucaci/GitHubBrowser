@@ -1,13 +1,20 @@
 import { handleActions } from 'redux-actions';
 import { IssueActionType } from '../actions/Issue';
-import { Issues, issuesMapper } from '../models/Issue';
+import {Issue, Issues, issuesMapper} from '../models/Issue';
+import { IssueConstants } from '../constants/IssueConstants';
+
+export type IssueStateFiltersType = {
+  page: number;
+  state: string;
+  sort: string;
+};
 
 export type IssueStateType = {
   isFetching: boolean;
   isFetched: boolean;
   error: boolean;
   errorMessage?: string;
-  page: number;
+  filters: IssueStateFiltersType;
   payload: Issues;
 };
 
@@ -15,9 +22,20 @@ export const initialState: IssueStateType = Object.freeze({
   isFetching: false,
   isFetched: false,
   error: false,
-  page: 1,
+  filters: {
+    page: 1,
+    state: IssueConstants.Filters.FILTER_BY_OPEN,
+    sort: IssueConstants.Filters.SORT_BY_CREATED,
+  },
   payload: [],
 });
+
+// GitHub returns duplicates (facepalm)
+// As of Jan 18th 2021, check out "481989177" id from page 22 and 23 from the following endpoint:
+// GET /repos/wix/react-native-navigation/issues?&state=closed&sort=comments&page=23&per_page=10
+const getUniqueListBy = (arr: Array<Object>, key: string): Array<Issue> => [
+  ...new Map(arr.map((item: any) => [item[key], item])).values(),
+];
 
 const issue = handleActions(
   {
@@ -30,7 +48,10 @@ const issue = handleActions(
         ...state,
         isFetching: firstLoad,
         error: false,
-        page: action.payload.page,
+        filters: {
+          ...state.filters,
+          page: action.payload.page,
+        },
         payload: firstLoad ? [] : state.payload,
       };
     },
@@ -45,18 +66,30 @@ const issue = handleActions(
         isFetched: true,
         error: false,
         payload:
-          state.page > 1 ? [...state.payload, ...dataMapped] : dataMapped,
+          state.filters.page > 1
+            ? getUniqueListBy([...state.payload, ...dataMapped], 'id')
+            : dataMapped,
       };
     },
     [IssueActionType.GET_ISSUES_FAILURE]: (
       state: IssueStateType,
-      action: { payload: any }, // // Should be "action: FSA<Error>"
+      action: { payload: any }, // Should be "action: FSA<Error>"
     ): IssueStateType => ({
       ...state,
       isFetching: false,
       isFetched: false,
       error: true,
       errorMessage: action.payload.error.message,
+    }),
+    [IssueActionType.SET_FILTERS]: (
+      state: IssueStateType,
+      action: { payload: any }, // Should be "action: FSA<SetFiltersPayload>"
+    ): IssueStateType => ({
+      ...state,
+      filters: {
+        ...state.filters,
+        ...action.payload.data,
+      },
     }),
   },
   initialState,

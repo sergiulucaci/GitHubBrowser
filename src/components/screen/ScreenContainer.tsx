@@ -11,10 +11,15 @@ const Base = styled(SafeAreaView)`
 
 type Props = {
   children: any;
+  style?: Object;
 };
 
-const ScreenContainer = ({ children }: Props) => (
-  <Base edges={['right', 'top', 'left']}>{children}</Base>
+const ScreenContainer = ({ children, style }: Props) => (
+  <Base style={style} edges={['right', 'top', 'left']}>{children}</Base>
 );
+
+ScreenContainer.defaultProps = {
+  style: {},
+};
 
 export default ScreenContainer;

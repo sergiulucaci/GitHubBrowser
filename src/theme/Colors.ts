@@ -17,12 +17,13 @@ type ColorsType = {
     BLACK: string,
     LIGHT_BLACK: string,
     SUNSET_YELLOW: string,
+    LIGHT_GRAY: string,
   },
 };
 
 const Colors: ColorsType = Object.freeze({
   PRIMARY: {
-    BLUE: '#2699FB',
+    BLUE: '#2997ff',
     DARK_BLUE: '#2E449D',
     ERROR: '#E9458E',
     GREEN: '#56d364',
@@ -39,6 +40,7 @@ const Colors: ColorsType = Object.freeze({
     BLACK: '#000000',
     LIGHT_BLACK: '#222222',
     SUNSET_YELLOW: '#FCE093',
+    LIGHT_GRAY: '#f3f3f3',
   },
 });
 

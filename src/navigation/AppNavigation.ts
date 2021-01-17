@@ -42,8 +42,8 @@ export function navigateToIssueList({
           noBorder: true,
           rightButtons: [
             {
-              id: 'filter_issues',
-              text: i18next.t('issue.filters'),
+              id: Screens.TopNavButtons.FilterIssues,
+              text: i18next.t('issue.filtersOpenControl'),
             },
           ],
         },
@@ -51,6 +51,40 @@ export function navigateToIssueList({
       passProps: {
         repository,
       },
+    },
+  });
+}
+
+export function navigateToIssueFilters({
+  repository,
+}: {
+  repository: Repository;
+}): void {
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: Screens.IssueFilters,
+            options: {
+              topBar: {
+                title: {
+                  text: i18next.t('issue.filtersOpenControl'),
+                },
+                rightButtons: [
+                  {
+                    id: Screens.TopNavButtons.FilterIssuesDone,
+                    text: i18next.t('issue.filtersDoneControl'),
+                  },
+                ],
+              },
+            },
+            passProps: {
+              repository,
+            },
+          },
+        },
+      ],
     },
   });
 }

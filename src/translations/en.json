@@ -15,8 +15,20 @@
   },
   "issue": {
     "findIssuesTitle": "Find issues",
-    "filters": "Issues filters",
-    "noData": "No issues opened for this repository."
+    "noData": "No issues opened for this repository.",
+    "filtersOpenControl": "Issues Filters",
+    "filtersDoneControl": "Done",
+    "sortBy": "SORT BY",
+    "sortByCreated": "Created Date",
+    "sortByUpdated": "Update Date",
+    "sortByAmountOfComments": "Amount of Comments",
+    "filterBy": "FILTER BY",
+    "filterByOpen": "Open",
+    "filterByClosed": "Closed",
+    "filterByAll": "All",
+    "paginationType": "PAGINATION TYPE",
+    "paginationTypeClassic": "Classic Pagination",
+    "paginationTypeInfiniteScrolling": "Infinite Scrolling",
   },
   "network": {
     "alertNoNetworkTitle": "No internet connection found",
