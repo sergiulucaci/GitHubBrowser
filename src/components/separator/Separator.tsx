@@ -19,6 +19,6 @@ const Separator = ({ withMarginVertical }: SeparatorProps) => (
 
 Separator.defaultProps = {
   withMarginVertical: false,
-}
+};
 
 export default Separator;

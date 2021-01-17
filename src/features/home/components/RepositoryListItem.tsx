@@ -88,7 +88,8 @@ const RepositoryListItem = ({
 }) => (
   <Base
     delayPressIn={50}
-    onPress={() => navigateToIssueList({ componentId, repository: item })}>
+    onPress={() => navigateToIssueList({ componentId, repository: item })}
+  >
     <Row>
       <OwnerAvatar
         resizeMode="contain"

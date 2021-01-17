@@ -11,7 +11,6 @@ import {
   ScopeBar,
   ScreenContainer,
   ScreenTitle,
-  ScreenSubtitle,
   SearchInput,
   Separator,
 } from '../../../components';
@@ -46,10 +45,10 @@ const NoDataSubtitle = styled.Text`
   text-align: center;
 `;
 
-const ScreenSubtitleWrapper = styled(ScreenSubtitle)`
-  margin-top: 16px;
-  margin-bottom: 8px;
-`;
+// const ScreenSubtitleWrapper = styled(ScreenSubtitle)`
+//   margin-top: 16px;
+//   margin-bottom: 8px;
+// `;
 
 const Home = ({ componentId }: { componentId: string }) => {
   const dispatch = useDispatch();
@@ -153,12 +152,12 @@ const Home = ({ componentId }: { componentId: string }) => {
         secondText={t('home.scopeBarRepositories')}
         onSecondClick={onSearchByRepositoryClick}
       />
-      {/*{!data.isFetching && !!data.payload.totalCount && (*/}
-      {/*  <>*/}
-      {/*    <ScreenSubtitleWrapper text={`${data.payload.totalCount} results found`} />*/}
-      {/*    <Separator />*/}
-      {/*  </>*/}
-      {/*)}*/}
+      {/* {!data.isFetching && !!data.payload.totalCount && ( */}
+      {/*  <> */}
+      {/*    <ScreenSubtitleWrapper text={`${data.payload.totalCount} results found`} /> */}
+      {/*    <Separator /> */}
+      {/*  </> */}
+      {/* )} */}
     </>
   );
 

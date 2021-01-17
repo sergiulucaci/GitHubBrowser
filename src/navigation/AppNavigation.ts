@@ -1,8 +1,8 @@
 import { Navigation } from 'react-native-navigation';
 
+import i18next from 'i18next';
 import { Screens } from './Screens';
 import { Repository } from '../features/home/models/Repository';
-import i18next from "i18next";
 
 export function setHomeNavigation(): void {
   Navigation.setRoot({

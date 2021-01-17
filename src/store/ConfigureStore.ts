@@ -8,8 +8,7 @@ export default () => {
   const sagaMiddleware = createSagaMiddleware();
   const middleware: Array<any> = [sagaMiddleware];
 
-  const composeEnhancers =
-    (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+  const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
   const enhancer = composeEnhancers(applyMiddleware(...middleware));
 

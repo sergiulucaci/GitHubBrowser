@@ -24,8 +24,7 @@ const Button = styled.TouchableOpacity<ButtonProps>`
   height: 100%;
   align-items: center;
   justify-content: center;
-  background-color: ${({ active }) =>
-    active ? Colors.BACKGROUND.WHITE : Colors.SECONDARY.LIGHT_GRAY};
+  background-color: ${({ active }) => (active ? Colors.BACKGROUND.WHITE : Colors.SECONDARY.LIGHT_GRAY)};
 `;
 
 const Text = styled.Text`
@@ -66,13 +65,15 @@ const ScopeBar = ({
       <Button
         activeOpacity={1}
         active={firstIsActive}
-        onPress={handleOnFirstButtonPress}>
+        onPress={handleOnFirstButtonPress}
+      >
         <Text>{firstText}</Text>
       </Button>
       <Button
         activeOpacity={1}
         active={!firstIsActive}
-        onPress={handleOnSecondButtonPress}>
+        onPress={handleOnSecondButtonPress}
+      >
         <Text>{secondText}</Text>
       </Button>
     </Wrapper>

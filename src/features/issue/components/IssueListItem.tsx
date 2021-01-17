@@ -45,8 +45,7 @@ const LabelWrapper = styled.View`
 const LabelItemWrapper = styled.View<{ bgColor: string }>`
   padding-horizontal: 4px;
   padding-vertical: 2px;
-  background-color: ${(props) =>
-    props.bgColor !== '000000' ? `#${props.bgColor}` : 'white'};
+  background-color: ${(props) => (props.bgColor !== '000000' ? `#${props.bgColor}` : 'white')};
   border-radius: 12px;
   margin-left: 4px;
   margin-bottom: 4px;
@@ -60,17 +59,19 @@ const LabelText = styled.Text`
 
 const DateTitle = styled.Text`
   font-size: 13px;
+  align-self: flex-end;
   color: ${Colors.SECONDARY.GRAY};
 `;
 
 const CommentsNumberWrapper = styled.View`
   background-color: ${Colors.SECONDARY.LIGHT_GRAY};
   border-radius: 2px;
+  align-self: flex-end;
   align-items: center;
   justify-content: center;
   margin-top: 4px;
-  padding-horizontal: 4px;
   padding-vertical: 2px;
+  padding-horizontal: 4px;
 `;
 
 const CommentsNumber = styled.Text`
@@ -100,8 +101,8 @@ const IssueListItem = ({
           <IssueNumber>{`#${item.number}`}</IssueNumber>
           <IssueTitle>{item.title}</IssueTitle>
           <LabelWrapper>
-            {!!item.labels.length &&
-              item.labels.map((label) => (
+            {!!item.labels.length
+              && item.labels.map((label) => (
                 <LabelItemWrapper key={label.id} bgColor={label.color}>
                   <LabelText>{label.name}</LabelText>
                 </LabelItemWrapper>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
