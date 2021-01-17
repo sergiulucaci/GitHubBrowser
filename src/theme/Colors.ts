@@ -25,7 +25,7 @@ const Colors: ColorsType = Object.freeze({
     BLUE: '#2699FB',
     DARK_BLUE: '#2E449D',
     ERROR: '#E9458E',
-    GREEN: '#83F6A1',
+    GREEN: '#56d364',
     PINK: '#EF4B84',
   },
   SECONDARY: {

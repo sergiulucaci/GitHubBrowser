@@ -13,6 +13,11 @@
     "noDataYetTitle": "No Data (yet)",
     "noDataYetSubtitle": "Start searching for repositories using the above input."
   },
+  "issue": {
+    "findIssuesTitle": "Find issues",
+    "filters": "Issues filters",
+    "noData": "No issues opened for this repository."
+  },
   "network": {
     "alertNoNetworkTitle": "No internet connection found",
     "alertNoNetworkSubtitle": "Turn on WiFi or mobile data and try to reload this screen."

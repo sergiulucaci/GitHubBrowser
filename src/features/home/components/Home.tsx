@@ -11,13 +11,14 @@ import {
   ScopeBar,
   ScreenContainer,
   ScreenTitle,
+  ScreenSubtitle,
   SearchInput,
+  Separator,
 } from '../../../components';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
 import { selectRepository } from '../selectors/Home';
 import RepositoryListItem from './RepositoryListItem';
 import Colors from '../../../theme/Colors';
-import ScreenSubtitle from '../../../components/screen/ScreenSubtitle';
 import { RepositoryStateType } from '../reducers/Home';
 
 const NoDataWrapper = styled.View`
@@ -32,6 +33,7 @@ const LoadingWrapper = styled.ActivityIndicator`
 `;
 
 const NoDataTitle = styled.Text`
+  color: ${Colors.SECONDARY.DARK_GRAY};
   font-size: 17px;
   font-weight: 500;
   text-align: center;
@@ -42,11 +44,6 @@ const NoDataSubtitle = styled.Text`
   font-size: 13px;
   margin-top: 4px;
   text-align: center;
-`;
-
-const Separator = styled.View`
-  border-bottom-width: 0.5px;
-  border-color: ${Colors.SECONDARY.LIGHT_GRAY};
 `;
 
 const ScreenSubtitleWrapper = styled(ScreenSubtitle)`

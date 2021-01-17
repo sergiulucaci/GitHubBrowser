@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 import Colors from '../../theme/Colors';
@@ -29,6 +29,7 @@ const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 
 const Text = styled.Text`
+  color: ${Colors.SECONDARY.DARK_GRAY};
   font-size: 13px;
   font-weight: 500;
 `;

@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import Colors from '../../theme/Colors';
 
 const Text = styled.Text`
-  font-size: 34px;
+  font-size: 28px;
   font-weight: bold;
   color: ${Colors.SECONDARY.DARK_GRAY};
 `;

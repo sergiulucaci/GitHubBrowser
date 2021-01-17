@@ -2,7 +2,7 @@ import { takeLatest, call, put, all } from 'redux-saga/effects';
 import config from '../../../config/Config';
 
 import {
-  SessionsActionType,
+  HomeActionType,
   getRepositorySuccessAction,
   getRepositoryFailureAction,
   GetRepositoryPayload,
@@ -33,6 +33,6 @@ export function* getRepositoryActionSaga(
 
 export function* homeSaga(): Generator<any, any, any> {
   yield all([
-    takeLatest(SessionsActionType.GET_REPOSITORY, getRepositoryActionSaga),
+    takeLatest(HomeActionType.GET_REPOSITORY, getRepositoryActionSaga),
   ]);
 }

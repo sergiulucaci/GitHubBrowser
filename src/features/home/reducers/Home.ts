@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import {
-  SessionsActionType,
+  HomeActionType,
 } from '../actions/Home';
 import {
   Repositories,
@@ -30,7 +30,7 @@ export const initialState: RepositoryStateType = Object.freeze({
 
 const home = handleActions(
   {
-    [SessionsActionType.GET_REPOSITORY]: (
+    [HomeActionType.GET_REPOSITORY]: (
       state: RepositoryStateType,
       action: { payload: { page: number } },
     ): RepositoryStateType => {
@@ -49,7 +49,7 @@ const home = handleActions(
         },
       };
     },
-    [SessionsActionType.GET_REPOSITORY_SUCCESS]: (
+    [HomeActionType.GET_REPOSITORY_SUCCESS]: (
       state: RepositoryStateType,
       action: { payload: any }, // Should be "action: FSA<GetRepositorySuccessPayload>"
     ): RepositoryStateType => {
@@ -68,7 +68,7 @@ const home = handleActions(
             : dataMapped,
       };
     },
-    [SessionsActionType.GET_REPOSITORY_FAILURE]: (
+    [HomeActionType.GET_REPOSITORY_FAILURE]: (
       state: RepositoryStateType,
       action: { payload: any }, // // Should be "action: FSA<Error>"
     ): RepositoryStateType => ({

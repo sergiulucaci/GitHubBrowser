@@ -23,13 +23,13 @@ const BottomRow = styled.View`
   margin-top: 6px;
 `;
 
-const OwnerAvatar = styled.Image`
+export const OwnerAvatar = styled.Image`
   height: 25px;
   width: 25px;
   border-radius: 4px;
 `;
 
-const OwnerTitle = styled.Text`
+export const OwnerTitle = styled.Text`
   font-size: 13px;
   color: ${Colors.SECONDARY.DARK_GRAY};
   margin-left: 8px;
@@ -48,7 +48,7 @@ const RepoTitle = styled.Text`
   margin-top: 6px;
 `;
 
-const RepoDescription = styled.Text`
+export const RepoDescription = styled.Text`
   font-size: 17px;
   color: ${Colors.SECONDARY.DARK_GRAY};
   margin-top: 6px;
@@ -62,6 +62,23 @@ const Bullet = styled.View`
   margin-left: 8px;
 `;
 
+export const RepoFooter = ({
+  stargazersCount,
+  language,
+}: {
+  stargazersCount: number;
+  language: string;
+}) => (
+  <BottomRow>
+    <Row>
+      <Icon name="star-outline" size={12} color={Colors.SECONDARY.GRAY} />
+      <BottomText>{stargazersCount}</BottomText>
+      <Bullet />
+      <BottomText>{language}</BottomText>
+    </Row>
+  </BottomRow>
+);
+
 const RepositoryListItem = ({
   componentId,
   item,
@@ -71,8 +88,7 @@ const RepositoryListItem = ({
 }) => (
   <Base
     delayPressIn={50}
-    onPress={() => navigateToIssueList({ componentId, repository: item })}
-  >
+    onPress={() => navigateToIssueList({ componentId, repository: item })}>
     <Row>
       <OwnerAvatar
         resizeMode="contain"
@@ -82,14 +98,7 @@ const RepositoryListItem = ({
     </Row>
     <RepoTitle>{item.name}</RepoTitle>
     <RepoDescription>{item.description}</RepoDescription>
-    <BottomRow>
-      <Row>
-        <Icon name="star-outline" size={12} color={Colors.SECONDARY.GRAY} />
-        <BottomText>{item.stargazersCount}</BottomText>
-        <Bullet />
-        <BottomText>{item.language}</BottomText>
-      </Row>
-    </BottomRow>
+    <RepoFooter stargazersCount={item.stargazersCount} language={item.language} />
   </Base>
 );
 
