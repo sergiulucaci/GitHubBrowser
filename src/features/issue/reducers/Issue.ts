@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { IssueActionType } from '../actions/Issue';
-import {Issue, Issues, issuesMapper} from '../models/Issue';
+import { Issue, Issues, issuesMapper } from '../models/Issue';
 import { IssueConstants } from '../constants/IssueConstants';
 
 export type IssueStateFiltersType = {

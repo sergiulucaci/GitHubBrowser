@@ -1,4 +1,10 @@
-import { takeLatest, call, put, all, select } from 'redux-saga/effects';
+import {
+  takeLatest,
+  call,
+  put,
+  all,
+  select,
+} from 'redux-saga/effects';
 import config from '../../../config/Config';
 
 import {

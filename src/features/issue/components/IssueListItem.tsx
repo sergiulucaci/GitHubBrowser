@@ -80,10 +80,8 @@ const CommentsNumber = styled.Text`
 `;
 
 const IssueListItem = ({
-  componentId,
   item,
 }: {
-  componentId: string;
   item: Issue;
 }) => {
   const isOpen = item.state === 'open';
