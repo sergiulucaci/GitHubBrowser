@@ -3,6 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import i18next from 'i18next';
 import { Screens } from './Screens';
 import { Repository } from '../features/home/models/Repository';
+import { Issue } from '../features/issue/models/Issue';
 
 export function setHomeNavigation(): void {
   Navigation.setRoot({
@@ -50,6 +51,32 @@ export function navigateToIssueList({
       },
       passProps: {
         repository,
+      },
+    },
+  });
+}
+
+export function navigateToIssueDetail({
+  componentId,
+  issue,
+  repository,
+}: {
+  componentId: string;
+  issue: Issue;
+  repository: Repository;
+}): void {
+  Navigation.push(componentId, {
+    component: {
+      name: Screens.IssueDetail,
+      options: {
+        topBar: {
+          drawBehind: true,
+          noBorder: true,
+        },
+      },
+      passProps: {
+        repository,
+        issue,
       },
     },
   });

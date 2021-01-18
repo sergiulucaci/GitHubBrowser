@@ -5,6 +5,8 @@ import moment from 'moment';
 
 import { Issue } from '../models/Issue';
 import Colors from '../../../theme/Colors';
+import { Repository } from '../../home/models/Repository';
+import { navigateToIssueDetail } from '../../../navigation/AppNavigation';
 
 const Base = styled.TouchableOpacity`
   padding-vertical: 12px;
@@ -79,14 +81,23 @@ const CommentsNumber = styled.Text`
   color: ${Colors.SECONDARY.DARK_GRAY};
 `;
 
+type IssueListItemProps = {
+  componentId: string;
+  issue: Issue;
+  repository: Repository;
+};
+
 const IssueListItem = ({
-  item,
-}: {
-  item: Issue;
-}) => {
-  const isOpen = item.state === 'open';
+  componentId,
+  issue,
+  repository,
+}: IssueListItemProps) => {
+  const isOpen = issue.state === 'open';
   return (
-    <Base delayPressIn={50} onPress={() => {}}>
+    <Base
+      delayPressIn={50}
+      onPress={() => navigateToIssueDetail({ componentId, issue, repository })}
+    >
       <Row>
         <LeftSide>
           <Icon
@@ -96,11 +107,11 @@ const IssueListItem = ({
           />
         </LeftSide>
         <CenterSide>
-          <IssueNumber>{`#${item.number}`}</IssueNumber>
-          <IssueTitle>{item.title}</IssueTitle>
+          <IssueNumber>{`#${issue.number}`}</IssueNumber>
+          <IssueTitle>{issue.title}</IssueTitle>
           <LabelWrapper>
-            {!!item.labels.length
-              && item.labels.map((label) => (
+            {!!issue.labels.length
+              && issue.labels.map((label) => (
                 <LabelItemWrapper key={label.id} bgColor={label.color}>
                   <LabelText>{label.name}</LabelText>
                 </LabelItemWrapper>
@@ -108,10 +119,10 @@ const IssueListItem = ({
           </LabelWrapper>
         </CenterSide>
         <RightSide>
-          <DateTitle>{moment(item.createdAt).fromNow(true)}</DateTitle>
-          {item.comments ? (
-            <CommentsNumberWrapper key={item.id}>
-              <CommentsNumber>{item.comments}</CommentsNumber>
+          <DateTitle>{moment(issue.createdAt).fromNow(true)}</DateTitle>
+          {issue.comments ? (
+            <CommentsNumberWrapper key={issue.id}>
+              <CommentsNumber>{issue.comments}</CommentsNumber>
             </CommentsNumberWrapper>
           ) : null}
         </RightSide>

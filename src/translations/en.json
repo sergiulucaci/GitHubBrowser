@@ -29,6 +29,9 @@
     "paginationType": "PAGINATION TYPE",
     "paginationTypeClassic": "Classic Pagination",
     "paginationTypeInfiniteScrolling": "Infinite Scrolling",
+    "stateOpen": "Open",
+    "stateClosed": "Closed",
+    "noCommentsData": "No replies for this issue."
   },
   "network": {
     "alertNoNetworkTitle": "No internet connection found",

@@ -33,6 +33,7 @@ export const OwnerTitle = styled.Text`
   font-size: 13px;
   color: ${Colors.SECONDARY.DARK_GRAY};
   margin-left: 8px;
+  flex: 1;
 `;
 
 const BottomText = styled.Text`

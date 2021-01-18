@@ -33,11 +33,13 @@ const callApi = async ({
   customErrorHandler = false,
 }: CallApiConfigProps) => {
   await checkForInternetConnection();
+  const token = config.api.accessToken;
   const axiosConfig = {
     baseURL: config.api.baseUrl,
     headers: {
       'Content-Type': 'application/json',
       Accept: config.api.baseUrlAcceptedVersion,
+      ...token ? { Authorization: `token ${token}` } : {},
     },
     ...apiConfig,
   };

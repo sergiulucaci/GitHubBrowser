@@ -17,7 +17,7 @@ import {
 } from '../actions/Issue';
 import { IssueConstants } from '../constants/IssueConstants';
 import { IssueStateType } from '../reducers/Issue';
-import { selectIssue } from '../selectors/Home';
+import { selectIssue } from '../selectors/Issue';
 
 const ScreenContainerWrapper = styled(ScreenContainer)`
   background-color: ${Colors.BACKGROUND.LIGHT_GRAY};

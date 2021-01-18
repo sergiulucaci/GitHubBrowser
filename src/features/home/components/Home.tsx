@@ -18,7 +18,7 @@ import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll'
 import { selectRepository } from '../selectors/Home';
 import RepositoryListItem from './RepositoryListItem';
 import Colors from '../../../theme/Colors';
-import { RepositoryStateType } from '../reducers/Home';
+import { HomeStateType } from '../reducers/Home';
 
 const NoDataWrapper = styled.View`
   align-items: center;
@@ -63,7 +63,7 @@ const Home = ({ componentId }: { componentId: string }) => {
     title: t('home.topNavTitle'),
   });
 
-  const data: RepositoryStateType = useSelector(selectRepository());
+  const data: HomeStateType = useSelector(selectRepository());
 
   const resetPageToLoad = () => {
     if (page > 1) {

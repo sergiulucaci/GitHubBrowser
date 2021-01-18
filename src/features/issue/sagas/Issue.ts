@@ -5,17 +5,16 @@ import {
   all,
   select,
 } from 'redux-saga/effects';
-import config from '../../../config/Config';
 
 import {
   IssueActionType,
   getIssuesSuccessAction,
   getIssuesFailureAction,
-  GetIssuesPayload,
+  GetIssuesPayload, GetIssueCommentsPayload, getIssueCommentsSuccessAction, getIssueCommentsFailureAction,
 } from '../actions/Issue';
 import { FSA } from '../../../store/FSA';
-import { getIssues } from '../api/Issue';
-import { selectIssueFilters } from '../selectors/Home';
+import { getIssueComments, getIssues } from '../api/Issue';
+import { selectIssueFilters } from '../selectors/Issue';
 
 export function* getIssuesActionSaga(
   action: FSA<GetIssuesPayload>,
@@ -25,22 +24,49 @@ export function* getIssuesActionSaga(
   const { state, sort } = filters;
 
   try {
-    let qParsed = `${organization}/${repository}/issues?`;
+    let qParsed = '';
     if (state) {
       qParsed = `${qParsed}&state=${state}`;
     }
     if (sort) {
       qParsed = `${qParsed}&sort=${sort}`;
     }
-    qParsed = `${qParsed}&page=${page}&per_page=10&access_token=${config.api.accessToken}`;
+    qParsed = `${qParsed}&page=${page}&per_page=10`;
 
-    const rs: any = yield call(getIssues, qParsed);
+    const rs: any = yield call(getIssues, { query: qParsed, organization, repository });
     yield put(getIssuesSuccessAction(rs));
   } catch (e) {
     yield put(getIssuesFailureAction(e));
   }
 }
 
+export function* getIssueCommentsActionSaga(
+  action: FSA<GetIssueCommentsPayload>,
+): Generator<Object, void> {
+  const {
+    organization,
+    repository,
+    page,
+    issueNumber,
+  } = action.payload;
+
+  try {
+    const query = `page=${page}&per_page=10`;
+    const rs: any = yield call(getIssueComments, {
+      query,
+      organization,
+      repository,
+      issueNumber,
+    });
+    yield put(getIssueCommentsSuccessAction(rs));
+  } catch (e) {
+    yield put(getIssueCommentsFailureAction(e));
+  }
+}
+
 export function* issueSaga(): Generator<any, any, any> {
-  yield all([takeLatest(IssueActionType.GET_ISSUES, getIssuesActionSaga)]);
+  yield all([
+    takeLatest(IssueActionType.GET_ISSUES, getIssuesActionSaga),
+    takeLatest(IssueActionType.GET_ISSUE_COMMENTS, getIssueCommentsActionSaga),
+  ]);
 }

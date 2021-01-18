@@ -1,7 +1,6 @@
 import {
   takeLatest, call, put, all,
 } from 'redux-saga/effects';
-import config from '../../../config/Config';
 
 import {
   HomeActionType,
@@ -24,7 +23,7 @@ export function* getRepositoryActionSaga(
     } else if (repository) {
       qParsed = encodeURIComponent(`${repository} in:name`);
     }
-    qParsed = `${qParsed}&page=${page}&per_page=10&access_token=${config.api.accessToken}`;
+    qParsed = `${qParsed}&page=${page}&per_page=10`;
 
     const rs: any = yield call(getRepository, qParsed);
     yield put(getRepositorySuccessAction(rs));

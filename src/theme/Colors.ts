@@ -10,6 +10,8 @@ type ColorsType = {
     GRAY: string,
     DARK_GRAY: string,
     LIGHT_GRAY: string,
+    LIGHT_GREEN: string,
+    LIGHT_ERROR: string,
     TRANSPARENT: string,
   },
   BACKGROUND: {
@@ -31,6 +33,8 @@ const Colors: ColorsType = Object.freeze({
   },
   SECONDARY: {
     LIGHT_GRAY: '#eeeeef',
+    LIGHT_GREEN: '#e2fce4',
+    LIGHT_ERROR: '#faa4cd',
     GRAY: '#919191',
     DARK_GRAY: '#1d1d1f',
     TRANSPARENT: 'rgba(0, 0, 0, 0)',

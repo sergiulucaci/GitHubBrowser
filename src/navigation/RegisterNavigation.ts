@@ -2,6 +2,7 @@ import { Navigation } from 'react-native-navigation';
 
 import Home from '../features/home/components/Home';
 import IssueList from '../features/issue/components/IssueList';
+import IssueDetail from '../features/issue/components/IssueDetail';
 import IssueFilters from '../features/issue/components/IssueFilters';
 import reduxProviderHOC from '../store/ReduxProviderHOC';
 
@@ -13,5 +14,6 @@ export default function registerNavigationScreens(): void {
 
   // Issue
   Navigation.registerComponent(Screens.IssueList, reduxProviderHOC(IssueList));
+  Navigation.registerComponent(Screens.IssueDetail, reduxProviderHOC(IssueDetail));
   Navigation.registerComponent(Screens.IssueFilters, reduxProviderHOC(IssueFilters));
 }

@@ -11,7 +11,7 @@ const Wrapper = styled.View`
   background-color: ${Colors.SECONDARY.LIGHT_GRAY};
   border-radius: 10px;
   padding-horizontal: 8px;
-  margin-top: 8px;
+  margin-top: 6px;
 `;
 
 const Input = styled.TextInput`

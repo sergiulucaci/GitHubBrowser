@@ -20,7 +20,7 @@ import {
 } from '../../home/components/RepositoryListItem';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
 import { getIssuesAction } from '../actions/Issue';
-import { selectIssue } from '../selectors/Home';
+import { selectIssue } from '../selectors/Issue';
 import { IssueStateType } from '../reducers/Issue';
 import IssueListItem from './IssueListItem';
 import Colors from '../../../theme/Colors';
@@ -31,7 +31,7 @@ const Row = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 6px;
 `;
 
 const NoDataWrapper = styled.View`
@@ -64,7 +64,7 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
   const { onScroll } = useSetScreenTitleOnScroll({
     componentId,
     title: repository.name,
-    additionalPadding: 32,
+    additionalPadding: 30,
   });
 
   const data: IssueStateType = useSelector(selectIssue());
@@ -161,7 +161,11 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
         ListEmptyComponent={NoDataComponent}
         data={data.payload}
         renderItem={({ item }) => (
-          <IssueListItem componentId={componentId} item={item} />
+          <IssueListItem
+            componentId={componentId}
+            issue={item}
+            repository={repository}
+          />
         )}
         keyExtractor={(item: { id: number }) => String(item.id)}
       />

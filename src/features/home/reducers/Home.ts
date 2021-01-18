@@ -7,7 +7,7 @@ import {
   repositoriesMapper,
 } from '../models/Repository';
 
-export type RepositoryStateType = {
+export type HomeStateType = {
   isFetching: boolean;
   isFetched: boolean;
   error: boolean;
@@ -16,7 +16,7 @@ export type RepositoryStateType = {
   payload: Repositories;
 };
 
-export const initialState: RepositoryStateType = Object.freeze({
+export const initialState: HomeStateType = Object.freeze({
   isFetching: false,
   isFetched: false,
   error: false,
@@ -31,9 +31,9 @@ export const initialState: RepositoryStateType = Object.freeze({
 const home = handleActions(
   {
     [HomeActionType.GET_REPOSITORY]: (
-      state: RepositoryStateType,
+      state: HomeStateType,
       action: { payload: { page: number } },
-    ): RepositoryStateType => {
+    ): HomeStateType => {
       const firstLoad = action.payload.page < 2;
       return {
         ...state,
@@ -50,9 +50,9 @@ const home = handleActions(
       };
     },
     [HomeActionType.GET_REPOSITORY_SUCCESS]: (
-      state: RepositoryStateType,
+      state: HomeStateType,
       action: { payload: any }, // Should be "action: FSA<GetRepositorySuccessPayload>"
-    ): RepositoryStateType => {
+    ): HomeStateType => {
       const dataMapped = repositoriesMapper(action.payload.data);
       return {
         ...state,
@@ -69,9 +69,9 @@ const home = handleActions(
       };
     },
     [HomeActionType.GET_REPOSITORY_FAILURE]: (
-      state: RepositoryStateType,
+      state: HomeStateType,
       action: { payload: any }, // // Should be "action: FSA<Error>"
-    ): RepositoryStateType => ({
+    ): HomeStateType => ({
       ...state,
       isFetching: false,
       isFetched: false,
