@@ -68,4 +68,5 @@ yarn android
 ## TODOS:
 
 1. Handle errors in a better way by status criteria
+1. Decide about unit / end-to-end test approach and start writing them
 1. Improve UI & UX for Android
