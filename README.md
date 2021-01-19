@@ -33,13 +33,13 @@ Change **API_BASE_URL** and **API_BASE_URL_ACCEPTED_VERSION** only if GitHub API
 **IMPORTANT**: for **API_ACCESS_TOKEN** you will have to generate a new token using: https://github.com/settings/tokens/new. Otherwise you will have a small limit of GitHub Api requests per minute.
 
 ### Install dependencies
-Assuming you have the terminal opened at the root of project: 
+Assuming you have the terminal opened at the root of the project: 
 ```
 yarn install
 ```
 
 ### Install pods
-Assuming you have the terminal opened at the root of project:
+Assuming you have the terminal opened at the root of the project:
 ```
 cd ios && pod install
 ```
