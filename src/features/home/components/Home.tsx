@@ -11,9 +11,11 @@ import { getRepositoryAction } from '../actions/Home';
 import {
   ScopeBar,
   ScreenContainer,
-  ScreenTitle,
+  XLargeText,
   SearchInput,
   Separator,
+  LargeText,
+  SmallText,
 } from '../../../components';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
 import { selectRepository } from '../selectors/Home';
@@ -34,16 +36,12 @@ const LoadingWrapper = styled.ActivityIndicator`
   margin-top: 40px;
 `;
 
-const NoDataTitle = styled.Text`
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-size: 17px;
-  font-weight: 500;
+const NoDataTitle = styled(LargeText)`
   text-align: center;
 `;
 
-const NoDataSubtitle = styled.Text`
+const NoDataSubtitle = styled(SmallText)`
   color: ${Colors.SECONDARY.GRAY};
-  font-size: 13px;
   margin-top: 4px;
   text-align: center;
 `;
@@ -147,7 +145,7 @@ const Home = ({ componentId }: { componentId: string }) => {
 
   const ScreenHeader = (
     <>
-      <ScreenTitle text={t('home.containerTitle')} />
+      <XLargeText text={t('home.containerTitle')} />
       <SearchInput
         placeholder={t(
           searchByOrganizationActive
@@ -177,14 +175,12 @@ const Home = ({ componentId }: { componentId: string }) => {
     }
     return (
       <NoDataWrapper>
-        <NoDataTitle>
-          {t(searchText ? 'search.noResultsTitle' : 'search.noDataYetTitle')}
-        </NoDataTitle>
-        <NoDataSubtitle>
-          {searchText
+        <NoDataTitle text={t(searchText ? 'search.noResultsTitle' : 'search.noDataYetTitle')} />
+        <NoDataSubtitle text={
+          searchText
             ? t('search.noResultsSubtitle', { value: searchText })
             : t('search.noDataYetSubtitle')}
-        </NoDataSubtitle>
+         />
       </NoDataWrapper>
     );
   };

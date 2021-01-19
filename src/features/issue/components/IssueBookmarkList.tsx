@@ -5,8 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import {
+  LargeText,
   ScreenContainer,
-  ScreenTitle,
+  SmallText,
+  XLargeText,
 } from '../../../components';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
 import { selectIssueBookmarks } from '../selectors/Issue';
@@ -21,16 +23,12 @@ const NoDataWrapper = styled.View`
   margin-top: 50px;
 `;
 
-const NoDataTitle = styled.Text`
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-size: 17px;
-  font-weight: 500;
+const NoDataTitle = styled(LargeText)`
   text-align: center;
 `;
 
-const NoDataSubtitle = styled.Text`
+const NoDataSubtitle = styled(SmallText)`
   color: ${Colors.SECONDARY.GRAY};
-  font-size: 13px;
   margin-top: 4px;
   text-align: center;
 `;
@@ -52,10 +50,8 @@ const IssueBookmarkList = ({
 
   const NoDataComponent = () => (
     <NoDataWrapper>
-      <NoDataTitle>{t('issue.noBookmarks')}</NoDataTitle>
-      <NoDataSubtitle>
-        {t('issue.noBookmarksSubtitle')}
-      </NoDataSubtitle>
+      <NoDataTitle text={t('issue.noBookmarks')} />
+      <NoDataSubtitle text={t('issue.noBookmarksSubtitle')} />
     </NoDataWrapper>
   );
 
@@ -64,7 +60,7 @@ const IssueBookmarkList = ({
       <FlatList
         contentContainerStyle={{ marginHorizontal: 16 }}
         onScroll={onScroll}
-        ListHeaderComponent={<ScreenTitle text={t('issue.bookmarksTitle')} />}
+        ListHeaderComponent={<XLargeText text={t('issue.bookmarksTitle')} />}
         ListEmptyComponent={NoDataComponent}
         data={data}
         renderItem={({ item }) => (

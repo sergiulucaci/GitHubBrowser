@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Colors from '../../theme/Colors';
+import Typography from '../../theme/Typography';
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -19,7 +20,7 @@ const Input = styled.TextInput`
   padding-top: 0;
   padding-bottom: 0;
   height: 32px;
-  font-size: 17px;
+  font-size: ${Typography.LARGE.FONT_SIZE};
   flex: 1;
 `;
 

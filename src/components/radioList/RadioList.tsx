@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { ScreenMediumText } from '../../components';
+import { MediumText } from '../../components';
 import Colors from '../../theme/Colors';
 
 const RadioSection = styled.View`
@@ -31,7 +31,7 @@ const RadioItemTextWrapper = styled.View`
   border-color: ${Colors.SECONDARY.LIGHT_GRAY};
 `;
 
-const RadioItemText = styled(ScreenMediumText)<{ disabled?: boolean }>`
+const RadioItemText = styled(MediumText)<{ disabled?: boolean }>`
   color: ${({ disabled }) => (disabled ? Colors.SECONDARY.GRAY : Colors.SECONDARY.DARK_GRAY)};
 `;
 

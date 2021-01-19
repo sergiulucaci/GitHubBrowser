@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Repository } from '../models/Repository';
 import Colors from '../../../theme/Colors';
 import { navigateToIssueList } from '../../../navigation/AppNavigation';
+import { LargeText, MediumText, SmallText } from '../../../components';
 
 const Base = styled.TouchableOpacity`
   padding-vertical: 12px;
@@ -29,29 +30,21 @@ export const OwnerAvatar = styled.Image`
   border-radius: 4px;
 `;
 
-export const OwnerTitle = styled.Text`
-  font-size: 13px;
-  color: ${Colors.SECONDARY.DARK_GRAY};
+export const OwnerTitle = styled(SmallText)`
   margin-left: 8px;
   flex: 1;
 `;
 
-const BottomText = styled.Text`
-  font-size: 13px;
+const BottomText = styled(SmallText)`
   color: ${Colors.SECONDARY.GRAY};
   margin-left: 4px;
 `;
 
-const RepoTitle = styled.Text`
-  font-size: 17px;
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-weight: 600;
+export const RepoTitle = styled(LargeText)`
   margin-top: 6px;
 `;
 
-export const RepoDescription = styled.Text`
-  font-size: 17px;
-  color: ${Colors.SECONDARY.DARK_GRAY};
+export const RepoDescription = styled(MediumText)`
   margin-top: 6px;
 `;
 
@@ -73,9 +66,9 @@ export const RepoFooter = ({
   <BottomRow>
     <Row>
       <Icon name="star-outline" size={12} color={Colors.SECONDARY.GRAY} />
-      <BottomText>{stargazersCount}</BottomText>
+      <BottomText text={stargazersCount} />
       <Bullet />
-      <BottomText>{language}</BottomText>
+      <BottomText text={language} />
     </Row>
   </BottomRow>
 );
@@ -96,10 +89,10 @@ const RepositoryListItem = ({
         resizeMode="contain"
         source={{ uri: item.owner.avatarUrl }}
       />
-      <OwnerTitle>{item.owner.login}</OwnerTitle>
+      <OwnerTitle text={item.owner.login} />
     </Row>
-    <RepoTitle>{item.name}</RepoTitle>
-    <RepoDescription>{item.description}</RepoDescription>
+    <RepoTitle text={item.name} />
+    <RepoDescription text={item.description} />
     <RepoFooter stargazersCount={item.stargazersCount} language={item.language} />
   </Base>
 );

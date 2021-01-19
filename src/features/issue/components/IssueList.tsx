@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Repository } from '../../home/models/Repository';
 import {
   ScreenContainer,
-  ScreenTitle,
-  ScreenSubtitle,
+  LargeText,
   Separator,
 } from '../../../components';
 import {
@@ -17,13 +16,13 @@ import {
   OwnerTitle,
   RepoDescription,
   RepoFooter,
+  RepoTitle,
 } from '../../home/components/RepositoryListItem';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
 import { getIssuesAction } from '../actions/Issue';
 import { selectIssue } from '../selectors/Issue';
 import { IssueStateType } from '../reducers/Issue';
 import IssueListItem from './IssueListItem';
-import Colors from '../../../theme/Colors';
 import { navigateToIssueFilters } from '../../../navigation/AppNavigation';
 import { Screens } from '../../../navigation/Screens';
 
@@ -41,10 +40,7 @@ const NoDataWrapper = styled.View`
   margin-top: 20px;
 `;
 
-const NoDataTitle = styled.Text`
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-size: 17px;
-  font-weight: 500;
+const NoDataTitle = styled(LargeText)`
   text-align: center;
 `;
 
@@ -64,7 +60,7 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
   const { onScroll } = useSetScreenTitleOnScroll({
     componentId,
     title: repository.name,
-    additionalPadding: 30,
+    additionalPadding: 26,
   });
 
   const data: IssueStateType = useSelector(selectIssue());
@@ -118,16 +114,16 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
           resizeMode="contain"
           source={{ uri: repository.owner.avatarUrl }}
         />
-        <OwnerTitle>{repository.owner.login}</OwnerTitle>
+        <OwnerTitle text={repository.owner.login} />
       </Row>
-      <ScreenTitle text={repository.name} />
-      <RepoDescription>{repository.description}</RepoDescription>
+      <RepoTitle text={repository.name} />
+      <RepoDescription text={repository.description} />
       <RepoFooter
         stargazersCount={repository.stargazersCount}
         language={repository.language}
       />
       <Separator withMarginVertical />
-      <ScreenSubtitle text={t('issue.findIssuesTitle')} />
+      <LargeText text={t('issue.findIssuesTitle')} />
     </>
   );
 
@@ -141,7 +137,7 @@ const IssueList = ({ componentId, repository }: IssueListProps) => {
     }
     return (
       <NoDataWrapper>
-        <NoDataTitle>{t('issue.noData')}</NoDataTitle>
+        <NoDataTitle text={t('issue.noData')} />
       </NoDataWrapper>
     );
   };

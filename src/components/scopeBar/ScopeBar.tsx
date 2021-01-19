@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import Colors from '../../theme/Colors';
+import { SmallText } from '../index';
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -27,9 +28,7 @@ const Button = styled.TouchableOpacity<ButtonProps>`
   background-color: ${({ active }) => (active ? Colors.BACKGROUND.WHITE : Colors.SECONDARY.LIGHT_GRAY)};
 `;
 
-const Text = styled.Text`
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-size: 13px;
+const Text = styled(SmallText)`
   font-weight: 500;
 `;
 
@@ -67,14 +66,14 @@ const ScopeBar = ({
         active={firstIsActive}
         onPress={handleOnFirstButtonPress}
       >
-        <Text>{firstText}</Text>
+        <Text text={firstText} />
       </Button>
       <Button
         activeOpacity={1}
         active={!firstIsActive}
         onPress={handleOnSecondButtonPress}
       >
-        <Text>{secondText}</Text>
+        <Text text={secondText} />
       </Button>
     </Wrapper>
   );

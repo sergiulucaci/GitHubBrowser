@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   RadioList,
   ScreenContainer,
-  ScreenSmallText,
+  XSmallText,
 } from '../../../components';
 import Colors from '../../../theme/Colors';
 import {
@@ -24,7 +24,7 @@ const ScreenContainerWrapper = styled(ScreenContainer)`
   padding-top: 12px;
 `;
 
-const Title = styled(ScreenSmallText)`
+const Title = styled(XSmallText)`
   margin-top: 12px;
   margin-left: 16px;
   color: ${Colors.SECONDARY.GRAY};

@@ -4,6 +4,7 @@ import moment from 'moment';
 import Markdown from 'react-native-markdown-display';
 
 import Colors from '../../../theme/Colors';
+import { MediumText } from '../../../components';
 
 const Base = styled.View`
   padding-vertical: 12px;
@@ -16,6 +17,10 @@ const Row = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`;
+
+const MarkdownWrapper = styled.View`
+  padding-top: 6px;
 `;
 
 const UserAvatar = styled.Image`
@@ -32,13 +37,10 @@ const UserTitleWrapper = styled.Text`
   margin-left: 8px;
 `;
 
-const UserTitle = styled.Text`
-  font-size: 15px;
-  color: ${Colors.SECONDARY.DARK_GRAY};
+const UserTitle = styled(MediumText)`
 `;
 
-const UserTitleGrayed = styled.Text`
-  font-size: 15px;
+const UserTitleGrayed = styled(MediumText)`
   color: ${Colors.SECONDARY.GRAY};
 `;
 
@@ -59,13 +61,15 @@ const IssueCommentComponent = ({
         source={{ uri: userAvatarUrl }}
       />
       <UserTitleWrapper>
-        <UserTitle>{`${userLogin}`}</UserTitle>
-        <UserTitleGrayed>{` \u2022 ${moment(createdAt).fromNow(true)}`}</UserTitleGrayed>
+        <UserTitle text={`${userLogin}`} />
+        <UserTitleGrayed text={` \u2022 ${moment(createdAt).fromNow(true)}`} />
       </UserTitleWrapper>
     </Row>
-    <Markdown>
-      {body}
-    </Markdown>
+    <MarkdownWrapper>
+      <Markdown>
+        {body}
+      </Markdown>
+    </MarkdownWrapper>
   </Base>
 );
 

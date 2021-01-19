@@ -7,6 +7,7 @@ import { Issue } from '../models/Issue';
 import Colors from '../../../theme/Colors';
 import { Repository } from '../../home/models/Repository';
 import { navigateToIssueDetail } from '../../../navigation/AppNavigation';
+import { MediumText, SmallText, XSmallText } from '../../../components';
 
 const Base = styled.TouchableOpacity`
   padding-vertical: 12px;
@@ -26,14 +27,11 @@ const CenterSide = styled.View`
 
 const RightSide = styled.View``;
 
-const IssueNumber = styled.Text`
-  font-size: 13px;
+const IssueNumber = styled(SmallText)`
   color: ${Colors.SECONDARY.GRAY};
 `;
 
-const IssueTitle = styled.Text`
-  font-size: 13px;
-  color: ${Colors.SECONDARY.DARK_GRAY};
+const IssueTitle = styled(MediumText)`
   font-weight: 500;
   margin-top: 2px;
 `;
@@ -53,14 +51,11 @@ const LabelItemWrapper = styled.View<{ bgColor: string }>`
   margin-bottom: 4px;
 `;
 
-const LabelText = styled.Text`
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-size: 11px;
+const LabelText = styled(XSmallText)`
   font-weight: 500;
 `;
 
-const DateTitle = styled.Text`
-  font-size: 13px;
+const DateTitle = styled(SmallText)`
   align-self: flex-end;
   color: ${Colors.SECONDARY.GRAY};
 `;
@@ -76,9 +71,7 @@ const CommentsNumberWrapper = styled.View`
   padding-horizontal: 4px;
 `;
 
-const CommentsNumber = styled.Text`
-  font-size: 11px;
-  color: ${Colors.SECONDARY.DARK_GRAY};
+const CommentsNumber = styled(SmallText)`
 `;
 
 type IssueListItemProps = {
@@ -107,22 +100,22 @@ const IssueListItem = ({
           />
         </LeftSide>
         <CenterSide>
-          <IssueNumber>{`#${issue.number}`}</IssueNumber>
-          <IssueTitle>{issue.title}</IssueTitle>
+          <IssueNumber text={`#${issue.number}`} />
+          <IssueTitle text={issue.title} />
           <LabelWrapper>
             {!!issue.labels.length
               && issue.labels.map((label) => (
                 <LabelItemWrapper key={label.id} bgColor={label.color}>
-                  <LabelText>{label.name}</LabelText>
+                  <LabelText text={label.name} />
                 </LabelItemWrapper>
               ))}
           </LabelWrapper>
         </CenterSide>
         <RightSide>
-          <DateTitle>{moment(issue.createdAt).fromNow(true)}</DateTitle>
+          <DateTitle text={moment(issue.createdAt).fromNow(true)} />
           {issue.comments ? (
             <CommentsNumberWrapper key={issue.id}>
-              <CommentsNumber>{issue.comments}</CommentsNumber>
+              <CommentsNumber text={issue.comments} />
             </CommentsNumberWrapper>
           ) : null}
         </RightSide>

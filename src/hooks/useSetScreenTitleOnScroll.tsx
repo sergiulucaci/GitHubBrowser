@@ -18,7 +18,7 @@ const useSetScreenTitleOnScroll = ({
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const yOffset = event.nativeEvent.contentOffset.y;
     const EXTRA_OFFSET = additionalPadding || 0;
-    const HIDDEN_CONTAINER_TITLE_OFFSET = 32 + EXTRA_OFFSET;
+    const HIDDEN_CONTAINER_TITLE_OFFSET = 26 + EXTRA_OFFSET;
     // If scroll action hides container title and title is shown already in top nav, do nothing
     if (yOffset > HIDDEN_CONTAINER_TITLE_OFFSET && titleShownInTopNav) {
       return;

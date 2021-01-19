@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components/native';
 
 import Colors from '../../theme/Colors';
-import { ScreenMediumText } from '../index';
+import { MediumText } from '../index';
 
 const Base = styled.View`
   display: flex;
@@ -37,7 +37,7 @@ type PageItemTextProps = {
   active: boolean;
 };
 
-const PageItemText = styled(ScreenMediumText)<PageItemTextProps>`
+const PageItemText = styled(MediumText)<PageItemTextProps>`
   color: ${({ active }) =>
     active ? Colors.BACKGROUND.WHITE : Colors.SECONDARY.DARK_GRAY};
 `;
@@ -46,7 +46,7 @@ type PageControlTextProps = {
   disabled: boolean;
 };
 
-const PageControlText = styled(ScreenMediumText)<PageControlTextProps>`
+const PageControlText = styled(MediumText)<PageControlTextProps>`
   color: ${({ disabled }) => (disabled ? Colors.SECONDARY.GRAY : Colors.PRIMARY.BLUE)};
 `;
 

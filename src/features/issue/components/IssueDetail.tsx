@@ -8,9 +8,10 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ScreenContainer,
-  ScreenSmallText,
-  ScreenTitle,
+  SmallText,
+  XLargeText,
   Separator,
+  LargeText,
 } from '../../../components';
 import { Repository } from '../../home/models/Repository';
 import { Issue, Issues } from '../models/Issue';
@@ -73,10 +74,14 @@ type StateLabelProps = {
   isOpen?: boolean;
 };
 
-const StateLabel = styled(ScreenSmallText)<StateLabelProps>`
+const StateLabel = styled(SmallText)<StateLabelProps>`
   color: ${({ isOpen }) => Colors.PRIMARY[isOpen ? 'GREEN' : 'ERROR']};
   font-weight: 500;
   margin-left: 4px;
+`;
+
+const IssueTitle = styled(LargeText)`
+  margin-top: 6px;
 `;
 
 const NoDataWrapper = styled.View`
@@ -90,10 +95,7 @@ const LoadingWrapper = styled.ActivityIndicator`
   margin-top: 40px;
 `;
 
-const NoDataTitle = styled.Text`
-  color: ${Colors.SECONDARY.DARK_GRAY};
-  font-size: 17px;
-  font-weight: 500;
+const NoDataTitle = styled(LargeText)`
   text-align: center;
 `;
 
@@ -110,7 +112,7 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
   const { onScroll } = useSetScreenTitleOnScroll({
     componentId,
     title: issue.title,
-    additionalPadding: 30,
+    additionalPadding: 26,
   });
   const isOpen = issue.state === 'open';
 
@@ -153,7 +155,7 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
             resizeMode="contain"
             source={{ uri: repository.owner.avatarUrl }}
           />
-          <OwnerTitle>{`${repository.owner.login}/${repository.name} #${issue.number}`}</OwnerTitle>
+          <OwnerTitle text={`${repository.owner.login}/${repository.name} #${issue.number}`} />
           <IonIcon
             size={22}
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
@@ -161,7 +163,7 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
             onPress={onBookmarkPress}
           />
         </Row>
-        <ScreenTitle text={issue.title} />
+        <IssueTitle text={issue.title} />
         <StateLabelAndIcon isOpen={isOpen}>
           <OctIcon
             size={16}
@@ -193,7 +195,7 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
     }
     return (
       <NoDataWrapper>
-        <NoDataTitle>{t('issue.noCommentsData')}</NoDataTitle>
+        <NoDataTitle text={t('issue.noCommentsData')} />
       </NoDataWrapper>
     );
   };

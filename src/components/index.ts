@@ -1,8 +1,9 @@
 export { default as ScreenContainer } from './screen/ScreenContainer';
-export { default as ScreenTitle } from './screen/ScreenTitle';
-export { default as ScreenSubtitle } from './screen/ScreenSubtitle';
-export { default as ScreenMediumText } from './screen/ScreenMediumText';
-export { default as ScreenSmallText } from './screen/ScreenSmallText';
+export { default as XSmallText } from './text/XSmallText';
+export { default as XLargeText } from './text/XLargeText';
+export { default as LargeText } from './text/LargeText';
+export { default as MediumText } from './text/MediumText';
+export { default as SmallText } from './text/SmallText';
 export { default as SearchInput } from './input/SearchInput';
 export { default as ScopeBar } from './scopeBar/ScopeBar';
 export { default as Separator } from './separator/Separator';
