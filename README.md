@@ -1,6 +1,6 @@
 # GitHubBrowser
 
-## Setup
+## Setup and Run the project
 
 ### Prerequisites
 
