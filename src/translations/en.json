@@ -41,6 +41,8 @@
     "alertNoNetworkSubtitle": "Turn on WiFi or mobile data and try to reload this screen."
   },
   "error": {
-    "apiErrorMessage": "Something went wrong on our side"
+    "apiErrorMessage": "Something went wrong on our side",
+    "configureEnvFileAccordinglyTitle": "Configure .env accordingly",
+    "configureEnvFileAccordinglyDescription": "You have to generate a GitHub token for your account that must be set in .env file. Checkout the readme."
   }
 }

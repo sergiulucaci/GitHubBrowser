@@ -55,6 +55,12 @@ const callApi = async ({
     }
     return Promise.resolve(response.data || response);
   } catch (error) {
+    if (error.response.status === 403) {
+      Alert.alert(
+        i18next.t('error.configureEnvFileAccordinglyTitle'),
+        i18next.t('error.configureEnvFileAccordinglyDescription'),
+      );
+    }
     await ErrorService.sendCrashReport({ error });
     return Promise.reject(new Error(error));
   }
