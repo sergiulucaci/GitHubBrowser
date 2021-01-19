@@ -17,6 +17,12 @@ export function setHomeNavigation(): void {
                 topBar: {
                   drawBehind: true,
                   noBorder: true,
+                  rightButtons: [
+                    {
+                      id: Screens.TopNavButtons.Bookmarks,
+                      text: i18next.t('issue.bookmarksTitle'),
+                    },
+                  ],
                 },
               },
             },
@@ -112,6 +118,24 @@ export function navigateToIssueFilters({
           },
         },
       ],
+    },
+  });
+}
+
+export function navigateToBookmarks({
+  componentId,
+}: {
+  componentId: string;
+}): void {
+  Navigation.push(componentId, {
+    component: {
+      name: Screens.Bookmarks,
+      options: {
+        topBar: {
+          drawBehind: true,
+          noBorder: true,
+        },
+      },
     },
   });
 }

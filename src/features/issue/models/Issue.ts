@@ -1,4 +1,6 @@
 /* eslint-disable camelcase */
+import { Repository } from '../../home/models/Repository';
+
 export type ApiIssues = Array<ApiIssue>;
 
 export type ApiIssue = {
@@ -37,6 +39,19 @@ export type Issue = {
   number: number,
   user: IssueUser;
   labels: Array<IssueLabel>;
+};
+
+export type IssueWithRepository = {
+  id: number;
+  title: string;
+  body: string;
+  state: string;
+  createdAt: string;
+  comments: number;
+  number: number,
+  user: IssueUser;
+  labels: Array<IssueLabel>;
+  repository: Repository;
 };
 
 export type IssueUser = {

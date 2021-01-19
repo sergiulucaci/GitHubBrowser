@@ -1,9 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import configureStore from './ConfigureStore';
 
-const { store } = configureStore();
+const { store, persistor } = configureStore();
 
 export type ComponentProvider = () => React.ComponentType<any>;
 
@@ -12,7 +13,9 @@ export default function reduxProviderHOC(
 ): ComponentProvider {
   return () => (props: any) => (
     <Provider store={store}>
-      <Component {...props} />
+      <PersistGate loading={null} persistor={persistor}>
+        <Component {...props} />
+      </PersistGate>
     </Provider>
   );
 }

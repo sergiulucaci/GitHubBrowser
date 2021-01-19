@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
 import { debounce } from 'lodash';
 import styled from 'styled-components/native';
+import { Navigation } from 'react-native-navigation';
 
 import { getRepositoryAction } from '../actions/Home';
 
@@ -19,6 +20,8 @@ import { selectRepository } from '../selectors/Home';
 import RepositoryListItem from './RepositoryListItem';
 import Colors from '../../../theme/Colors';
 import { HomeStateType } from '../reducers/Home';
+import { Screens } from '../../../navigation/Screens';
+import { navigateToBookmarks } from '../../../navigation/AppNavigation';
 
 const NoDataWrapper = styled.View`
   align-items: center;
@@ -45,11 +48,6 @@ const NoDataSubtitle = styled.Text`
   text-align: center;
 `;
 
-// const ScreenSubtitleWrapper = styled(ScreenSubtitle)`
-//   margin-top: 16px;
-//   margin-bottom: 8px;
-// `;
-
 const Home = ({ componentId }: { componentId: string }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -64,6 +62,20 @@ const Home = ({ componentId }: { componentId: string }) => {
   });
 
   const data: HomeStateType = useSelector(selectRepository());
+
+  useEffect(() => {
+    const navigationButtonEventListener = Navigation.events().registerNavigationButtonPressedListener(
+      ({ buttonId }) => {
+        if (buttonId === Screens.TopNavButtons.Bookmarks) {
+          navigateToBookmarks({ componentId });
+        }
+      },
+    );
+
+    return () => {
+      navigationButtonEventListener.remove();
+    };
+  }, []);
 
   const resetPageToLoad = () => {
     if (page > 1) {
@@ -152,12 +164,6 @@ const Home = ({ componentId }: { componentId: string }) => {
         secondText={t('home.scopeBarRepositories')}
         onSecondClick={onSearchByRepositoryClick}
       />
-      {/* {!data.isFetching && !!data.payload.totalCount && ( */}
-      {/*  <> */}
-      {/*    <ScreenSubtitleWrapper text={`${data.payload.totalCount} results found`} /> */}
-      {/*    <Separator /> */}
-      {/*  </> */}
-      {/* )} */}
     </>
   );
 

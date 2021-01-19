@@ -29,7 +29,7 @@ export const initialState: IssueCommentStateType = Object.freeze({
   payload: [],
 });
 
-// GitHub returns duplicates (facepalm)
+// GitHub API returns duplicates in some cases (facepalm)
 // As of Jan 18th 2021, check out "481989177" id from page 22 and 23 from the following endpoint:
 // GET /repos/wix/react-native-navigation/issues?&state=closed&sort=comments&page=23&per_page=10
 const getUniqueListBy = (

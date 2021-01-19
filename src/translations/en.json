@@ -15,7 +15,7 @@
   },
   "issue": {
     "findIssuesTitle": "Find issues",
-    "noData": "No issues opened for this repository.",
+    "noData": "No issues opened for this repository",
     "filtersOpenControl": "Issues Filters",
     "filtersDoneControl": "Done",
     "sortBy": "SORT BY",
@@ -31,7 +31,10 @@
     "paginationTypeInfiniteScrolling": "Infinite Scrolling",
     "stateOpen": "Open",
     "stateClosed": "Closed",
-    "noCommentsData": "No replies for this issue."
+    "noCommentsData": "No replies for this issue",
+    "bookmarksTitle": "Bookmarks",
+    "noBookmarks": "No Issues Bookmarked (yet)",
+    "noBookmarksSubtitle": "Start searching for issues and all bookmarked ones will be here."
   },
   "network": {
     "alertNoNetworkTitle": "No internet connection found",

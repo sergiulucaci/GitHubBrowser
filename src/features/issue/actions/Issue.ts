@@ -1,5 +1,5 @@
 import { FSA } from '../../../store/FSA';
-import type { ApiIssues } from '../models/Issue';
+import type { ApiIssues, IssueWithRepository } from '../models/Issue';
 import { ApiIssueComments } from '../models/IssueComment';
 
 export const IssueActionType = Object.freeze({
@@ -10,6 +10,8 @@ export const IssueActionType = Object.freeze({
   GET_ISSUE_COMMENTS_SUCCESS: '@Issue/GET_ISSUE_COMMENTS_SUCCESS',
   GET_ISSUE_COMMENTS_FAILURE: '@Issue/GET_ISSUE_COMMENTS_FAILURE',
   SET_FILTERS: '@Issue/SET_FILTERS',
+  ADD_ISSUE_TO_BOOKMARKS: '@Issue/ADD_ISSUE_TO_BOOKMARKS',
+  REMOVE_ISSUE_FROM_BOOKMARKS: '@Issue/REMOVE_ISSUE_FROM_BOOKMARKS',
 });
 
 export type IssueFiltersStateType = 'open' | 'closed' | 'all';
@@ -111,6 +113,7 @@ type Filters = {
   page?: number;
   sort?: IssueFiltersSortType;
 };
+
 export type SetFiltersPayload = {
   data: Filters;
 };
@@ -120,6 +123,32 @@ export function setFilters(data: Filters): FSA<SetFiltersPayload> {
     type: IssueActionType.SET_FILTERS,
     payload: {
       data,
+    },
+  };
+}
+
+export type AddIssueToBookmarksPayload = {
+  data: IssueWithRepository;
+};
+
+export function addIssueToBookmarks(data: IssueWithRepository): FSA<AddIssueToBookmarksPayload> {
+  return {
+    type: IssueActionType.ADD_ISSUE_TO_BOOKMARKS,
+    payload: {
+      data,
+    },
+  };
+}
+
+export type RemoveIssueToBookmarksPayload = {
+  id: number,
+};
+
+export function removeIssueFromBookmarks(id: number): FSA<RemoveIssueToBookmarksPayload> {
+  return {
+    type: IssueActionType.REMOVE_ISSUE_FROM_BOOKMARKS,
+    payload: {
+      id,
     },
   };
 }

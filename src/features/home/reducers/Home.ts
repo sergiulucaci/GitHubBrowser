@@ -5,6 +5,7 @@ import {
 import {
   Repositories,
   repositoriesMapper,
+  Repository,
 } from '../models/Repository';
 
 export type HomeStateType = {
@@ -27,6 +28,11 @@ export const initialState: HomeStateType = Object.freeze({
     totalCount: 0,
   },
 });
+
+// GitHub API returns duplicates in some cases (facepalm)
+const getUniqueListBy = (arr: Array<Object>, key: string): Array<Repository> => [
+  ...new Map(arr.map((item: any) => [item[key], item])).values(),
+];
 
 const home = handleActions(
   {
@@ -63,7 +69,7 @@ const home = handleActions(
           state.page > 1
             ? {
               ...dataMapped,
-              items: [...state.payload.items, ...dataMapped.items],
+              items: getUniqueListBy([...state.payload.items, ...dataMapped.items], 'id'),
             }
             : dataMapped,
       };

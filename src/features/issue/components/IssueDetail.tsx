@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import OctIcon from 'react-native-vector-icons/Octicons';
@@ -13,17 +13,18 @@ import {
   Separator,
 } from '../../../components';
 import { Repository } from '../../home/models/Repository';
-import { Issue } from '../models/Issue';
+import { Issue, Issues } from '../models/Issue';
 import {
   OwnerAvatar,
   OwnerTitle,
 } from '../../home/components/RepositoryListItem';
 import Colors from '../../../theme/Colors';
 import useSetScreenTitleOnScroll from '../../../hooks/useSetScreenTitleOnScroll';
-import { getIssueCommentsAction } from '../actions/Issue';
+import { addIssueToBookmarks, getIssueCommentsAction, removeIssueFromBookmarks } from '../actions/Issue';
 import { selectIssueComment } from '../selectors/IssueComment';
 import { IssueCommentStateType } from '../reducers/IssueComment';
 import IssueComment from './IssueComment';
+import { selectIssueBookmarks } from '../selectors/Issue';
 
 const ScreenContainerWrapper = styled(ScreenContainer)`
   background-color: ${Colors.BACKGROUND.LIGHT_GRAY};
@@ -114,10 +115,16 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
   const isOpen = issue.state === 'open';
 
   const data: IssueCommentStateType = useSelector(selectIssueComment());
+  const bookmarks: Issues = useSelector(selectIssueBookmarks());
 
   useEffect(() => {
     loadComments({ pageToLoad: page });
   }, []);
+
+  const isBookmarked = useMemo(
+    () => bookmarks.find((bookmark) => bookmark.id === issue.id),
+    [issue, bookmarks],
+  );
 
   const loadComments = ({ pageToLoad }: { pageToLoad: number }) => {
     dispatch(
@@ -128,6 +135,14 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
         page: pageToLoad,
       }),
     );
+  };
+
+  const onBookmarkPress = () => {
+    if (isBookmarked) {
+      dispatch(removeIssueFromBookmarks(issue.id));
+    } else {
+      dispatch(addIssueToBookmarks({ ...issue, repository }));
+    }
   };
 
   const ScreenHeader = (
@@ -141,8 +156,9 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
           <OwnerTitle>{`${repository.owner.login}/${repository.name} #${issue.number}`}</OwnerTitle>
           <IonIcon
             size={22}
-            name="bookmark-outline"
+            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
             color={Colors.PRIMARY.BLUE}
+            onPress={onBookmarkPress}
           />
         </Row>
         <ScreenTitle text={issue.title} />

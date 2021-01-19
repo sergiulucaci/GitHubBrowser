@@ -1,6 +1,11 @@
 import { handleActions } from 'redux-actions';
+import { persistReducer } from 'redux-persist';
+import storage from '@react-native-async-storage/async-storage';
+
 import { IssueActionType } from '../actions/Issue';
-import { Issue, Issues, issuesMapper } from '../models/Issue';
+import {
+  Issue, Issues, issuesMapper, IssueWithRepository,
+} from '../models/Issue';
 import { IssueConstants } from '../constants/IssueConstants';
 
 export type IssueStateFiltersType = {
@@ -16,6 +21,7 @@ export type IssueStateType = {
   errorMessage?: string;
   filters: IssueStateFiltersType;
   payload: Issues;
+  bookmarks: Array<IssueWithRepository>;
 };
 
 export const initialState: IssueStateType = Object.freeze({
@@ -28,11 +34,10 @@ export const initialState: IssueStateType = Object.freeze({
     sort: IssueConstants.Filters.SORT_BY_CREATED,
   },
   payload: [],
+  bookmarks: [],
 });
 
-// GitHub returns duplicates (facepalm)
-// As of Jan 18th 2021, check out "481989177" id from page 22 and 23 from the following endpoint:
-// GET /repos/wix/react-native-navigation/issues?&state=closed&sort=comments&page=23&per_page=10
+// GitHub API returns duplicates in some cases (facepalm)
 const getUniqueListBy = (arr: Array<Object>, key: string): Array<Issue> => [
   ...new Map(arr.map((item: any) => [item[key], item])).values(),
 ];
@@ -91,8 +96,31 @@ const issue = handleActions(
         ...action.payload.data,
       },
     }),
+    [IssueActionType.ADD_ISSUE_TO_BOOKMARKS]: (
+      state: IssueStateType,
+      action: { payload: any }, // Should be "action: FSA<AddIssueToBookmarksPayload>"
+    ): IssueStateType => ({
+      ...state,
+      bookmarks: [
+        ...state.bookmarks,
+        action.payload.data,
+      ],
+    }),
+    [IssueActionType.REMOVE_ISSUE_FROM_BOOKMARKS]: (
+      state: IssueStateType,
+      action: { payload: any }, // Should be "action: FSA<RemoveIssueToBookmarksPayload>"
+    ): IssueStateType => ({
+      ...state,
+      bookmarks: state.bookmarks.filter((bookmark) => bookmark.id !== action.payload.id),
+    }),
   },
   initialState,
 );
 
-export default issue;
+const persistConfig = {
+  key: 'issue',
+  storage,
+  whitelist: ['bookmarks'],
+};
+
+export default persistReducer<IssueStateType, any>(persistConfig, issue);
