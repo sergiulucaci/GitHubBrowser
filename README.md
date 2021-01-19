@@ -21,7 +21,7 @@ git clone https://github.com/sergiulucaci/GitHubBrowser
 
 ### Setup ENV
 
-Create a file called `.env` that should look like:
+Create a file called `.env` at the root of the project and fill it as follows:
 ```
 API_BASE_URL=https://api.github.com
 API_BASE_URL_ACCEPTED_VERSION=application/vnd.github.v3+json
@@ -64,3 +64,8 @@ or
 ```
 yarn android
 ```
+
+## TODOS:
+
+1. Handle errors in a better way by status criteria
+1. Improve UI & UX for Android

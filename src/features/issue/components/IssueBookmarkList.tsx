@@ -19,8 +19,7 @@ import { IssueWithRepository } from '../models/Issue';
 const NoDataWrapper = styled.View`
   align-items: center;
   justify-content: center;
-  height: 100%;
-  margin-top: 50px;
+  margin-top: 80px;
 `;
 
 const NoDataTitle = styled(LargeText)`
