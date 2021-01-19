@@ -38,8 +38,7 @@ type PageItemTextProps = {
 };
 
 const PageItemText = styled(MediumText)<PageItemTextProps>`
-  color: ${({ active }) =>
-    active ? Colors.BACKGROUND.WHITE : Colors.SECONDARY.DARK_GRAY};
+  color: ${({ active }) => (active ? Colors.BACKGROUND.WHITE : Colors.SECONDARY.DARK_GRAY)};
 `;
 
 type PageControlTextProps = {
@@ -86,7 +85,8 @@ const Pagination = ({
           <PageItem
             active={currentPage === page}
             key={page}
-            onPress={() => onPagePress(page)}>
+            onPress={() => onPagePress(page)}
+          >
             <PageItemText active={currentPage === page} text={page} />
           </PageItem>
         ))}
@@ -99,7 +99,8 @@ const Pagination = ({
           <PageItem
             active={page === currentPage}
             key={page}
-            onPress={() => onPagePress(page)}>
+            onPress={() => onPagePress(page)}
+          >
             <PageItemText active={currentPage === page} text={page} />
           </PageItem>
         ))}
@@ -112,15 +113,16 @@ const Pagination = ({
         <PageItem
           active={false}
           key={totalPages}
-          onPress={() => onPagePress(totalPages)}>
+          onPress={() => onPagePress(totalPages)}
+        >
           <PageItemText active={false} text={totalPages} />
         </PageItem>
       </PagesWrapper>
     );
   } else if (
-    currentPage === totalPages ||
-    currentPage === totalPages - 1 ||
-    currentPage === totalPages - 2
+    currentPage === totalPages
+    || currentPage === totalPages - 1
+    || currentPage === totalPages - 2
   ) {
     PagesComponent = (
       <PagesWrapper>
@@ -132,7 +134,8 @@ const Pagination = ({
           <PageItem
             active={false}
             key={totalPages - 3}
-            onPress={() => onPagePress(totalPages - 3)}>
+            onPress={() => onPagePress(totalPages - 3)}
+          >
             <PageItemText active={false} text={totalPages - 3} />
           </PageItem>
         )}
@@ -140,7 +143,8 @@ const Pagination = ({
           <PageItem
             active={page === currentPage}
             key={page}
-            onPress={() => onPagePress(page)}>
+            onPress={() => onPagePress(page)}
+          >
             <PageItemText active={page === currentPage} text={page} />
           </PageItem>
         ))}
@@ -157,7 +161,8 @@ const Pagination = ({
           <PageItem
             active={page === currentPage}
             key={page}
-            onPress={() => onPagePress(page)}>
+            onPress={() => onPagePress(page)}
+          >
             <PageItemText active={page === currentPage} text={page} />
           </PageItem>
         ))}
@@ -165,7 +170,8 @@ const Pagination = ({
         <PageItem
           active={false}
           key={totalPages}
-          onPress={() => onPagePress(totalPages)}>
+          onPress={() => onPagePress(totalPages)}
+        >
           <PageItemText active={false} text={totalPages} />
         </PageItem>
       </PagesWrapper>
@@ -177,14 +183,16 @@ const Pagination = ({
       <PageItem
         disabled={currentPage === 1}
         active={false}
-        onPress={() => onPagePress(currentPage - 1)}>
+        onPress={() => onPagePress(currentPage - 1)}
+      >
         <PageControlText disabled={currentPage === 1} text="Prev" />
       </PageItem>
       {PagesComponent}
       <PageItem
         disabled={currentPage === totalPages}
         active={false}
-        onPress={() => onPagePress(currentPage + 1)}>
+        onPress={() => onPagePress(currentPage + 1)}
+      >
         <PageControlText disabled={currentPage === totalPages} text="Next" />
       </PageItem>
     </Base>

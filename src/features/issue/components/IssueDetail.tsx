@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ScreenContainer,
   SmallText,
-  XLargeText,
   Separator,
   LargeText,
 } from '../../../components';

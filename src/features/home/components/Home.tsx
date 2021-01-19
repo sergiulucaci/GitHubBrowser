@@ -176,11 +176,10 @@ const Home = ({ componentId }: { componentId: string }) => {
     return (
       <NoDataWrapper>
         <NoDataTitle text={t(searchText ? 'search.noResultsTitle' : 'search.noDataYetTitle')} />
-        <NoDataSubtitle text={
-          searchText
-            ? t('search.noResultsSubtitle', { value: searchText })
-            : t('search.noDataYetSubtitle')}
-         />
+        <NoDataSubtitle text={searchText
+          ? t('search.noResultsSubtitle', { value: searchText })
+          : t('search.noDataYetSubtitle')}
+        />
       </NoDataWrapper>
     );
   };
