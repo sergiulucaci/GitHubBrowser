@@ -58,8 +58,8 @@ type StateLabelAndIconProps = {
 const StateLabelAndIcon = styled.View<StateLabelAndIconProps>`
   border-width: 0.5px;
   border-radius: 4px;
-  border-color: ${({ isOpen }) => Colors.PRIMARY[isOpen ? 'GREEN' : 'ERROR']};
-  background-color: ${({ isOpen }) => Colors.SECONDARY[isOpen ? 'LIGHT_GREEN' : 'LIGHT_ERROR']};
+  border-color: ${({ isOpen }) => Colors.PRIMARY[isOpen ? 'GREEN' : 'RED']};
+  background-color: ${({ isOpen }) => Colors.SECONDARY[isOpen ? 'LIGHT_GREEN' : 'LIGHT_RED']};
   display: flex;
   flex-direction: row;
   padding-vertical: 2px;
@@ -75,7 +75,7 @@ type StateLabelProps = {
 };
 
 const StateLabel = styled(SmallText)<StateLabelProps>`
-  color: ${({ isOpen }) => Colors.PRIMARY[isOpen ? 'GREEN' : 'ERROR']};
+  color: ${({ isOpen }) => Colors.PRIMARY[isOpen ? 'GREEN' : 'RED']};
   font-weight: 500;
   margin-left: 4px;
 `;
@@ -168,7 +168,7 @@ const IssueDetail = ({ componentId, repository, issue }: IssueDetailProps) => {
           <OctIcon
             size={16}
             name={isOpen ? 'issue-opened' : 'issue-closed'}
-            color={isOpen ? Colors.PRIMARY.GREEN : Colors.PRIMARY.ERROR}
+            color={isOpen ? Colors.PRIMARY.GREEN : Colors.PRIMARY.RED}
           />
           <StateLabel
             isOpen={isOpen}

@@ -96,7 +96,7 @@ const IssueListItem = ({
           <Icon
             size={16}
             name={isOpen ? 'issue-opened' : 'issue-closed'}
-            color={isOpen ? Colors.PRIMARY.GREEN : Colors.PRIMARY.ERROR}
+            color={isOpen ? Colors.PRIMARY.GREEN : Colors.PRIMARY.RED}
           />
         </LeftSide>
         <CenterSide>

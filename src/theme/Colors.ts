@@ -1,24 +1,18 @@
 type ColorsType = {
   PRIMARY: {
     BLUE: string,
-    DARK_BLUE: string,
-    ERROR: string,
+    RED: string,
     GREEN: string,
-    PINK: string,
   },
   SECONDARY: {
     GRAY: string,
     DARK_GRAY: string,
     LIGHT_GRAY: string,
     LIGHT_GREEN: string,
-    LIGHT_ERROR: string,
-    TRANSPARENT: string,
+    LIGHT_RED: string,
   },
   BACKGROUND: {
     WHITE: string,
-    BLACK: string,
-    LIGHT_BLACK: string,
-    SUNSET_YELLOW: string,
     LIGHT_GRAY: string,
   },
 };
@@ -26,24 +20,18 @@ type ColorsType = {
 const Colors: ColorsType = Object.freeze({
   PRIMARY: {
     BLUE: '#2997ff',
-    DARK_BLUE: '#2E449D',
-    ERROR: '#E9458E',
+    RED: '#E9458E',
     GREEN: '#56d364',
-    PINK: '#EF4B84',
   },
   SECONDARY: {
-    LIGHT_GRAY: '#eeeeef',
-    LIGHT_GREEN: '#e2fce4',
-    LIGHT_ERROR: '#faa4cd',
     GRAY: '#919191',
     DARK_GRAY: '#1d1d1f',
-    TRANSPARENT: 'rgba(0, 0, 0, 0)',
+    LIGHT_GRAY: '#eeeeef',
+    LIGHT_GREEN: '#e2fce4',
+    LIGHT_RED: '#faa4cd',
   },
   BACKGROUND: {
     WHITE: '#FFFFFF',
-    BLACK: '#000000',
-    LIGHT_BLACK: '#222222',
-    SUNSET_YELLOW: '#FCE093',
     LIGHT_GRAY: '#f3f3f3',
   },
 });
