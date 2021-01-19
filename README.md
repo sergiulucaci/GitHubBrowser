@@ -49,7 +49,7 @@ cd ios && pod install
 #### Start Metro
 
 ```
-yarn react-native start
+yarn start
 ```
 
 
