@@ -60,12 +60,13 @@ const sortByItems = [
 ];
 const paginationItems = [
   {
-    key: IssueConstants.Filters.PAGINATION_CLASSIC,
-    title: i18next.t('issue.paginationTypeClassic'),
-  },
-  {
     key: IssueConstants.Filters.PAGINATION_INFINITE_SCROLLING,
     title: i18next.t('issue.paginationTypeInfiniteScrolling'),
+  },
+  {
+    key: IssueConstants.Filters.PAGINATION_CLASSIC,
+    title: i18next.t('issue.paginationTypeClassic'),
+    disabled: true,
   },
 ];
 
@@ -79,7 +80,7 @@ const IssueFilters = () => {
   );
   const [sortByActiveKey, setSortByActiveKey] = useState(data.filters.sort);
   const [paginationTypeActiveKey, setPaginationTypeActiveKey] = useState(
-    IssueConstants.Filters.PAGINATION_CLASSIC,
+    IssueConstants.Filters.PAGINATION_INFINITE_SCROLLING,
   );
 
   const handleOnFilterByPress = (key: IssueFiltersStateType) => {

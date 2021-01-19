@@ -31,11 +31,14 @@ const RadioItemTextWrapper = styled.View`
   border-color: ${Colors.SECONDARY.LIGHT_GRAY};
 `;
 
-const RadioItemText = styled(ScreenMediumText)``;
+const RadioItemText = styled(ScreenMediumText)<{ disabled?: boolean }>`
+  color: ${({ disabled }) => (disabled ? Colors.SECONDARY.GRAY : Colors.SECONDARY.DARK_GRAY)};
+`;
 
 type RadioItemProps = {
   key: string;
   title: string;
+  disabled?: boolean,
 };
 
 type RadioListProps = {
@@ -47,7 +50,7 @@ type RadioListProps = {
 const RadioList = ({ activeKey, items, onItemPress }: RadioListProps) => (
   <RadioSection>
     {items.map((item: RadioItemProps) => (
-      <RadioItem onPress={() => onItemPress(item.key)} key={item.key}>
+      <RadioItem disabled={item.disabled} onPress={() => onItemPress(item.key)} key={item.key}>
         <IconWrapper>
           {item.key === activeKey && (
             <Icon
@@ -58,7 +61,7 @@ const RadioList = ({ activeKey, items, onItemPress }: RadioListProps) => (
           )}
         </IconWrapper>
         <RadioItemTextWrapper>
-          <RadioItemText text={item.title} />
+          <RadioItemText disabled={item.disabled} text={item.title} />
         </RadioItemTextWrapper>
       </RadioItem>
     ))}

@@ -7,3 +7,4 @@ export { default as SearchInput } from './input/SearchInput';
 export { default as ScopeBar } from './scopeBar/ScopeBar';
 export { default as Separator } from './separator/Separator';
 export { default as RadioList } from './radioList/RadioList';
+export { default as Pagination } from './pagination/Pagination';

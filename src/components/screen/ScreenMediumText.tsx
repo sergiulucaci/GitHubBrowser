@@ -9,7 +9,7 @@ const Text = styled.Text`
 `;
 
 type Props = {
-  text: string,
+  text: string | number,
   style?: Object,
 };
 
